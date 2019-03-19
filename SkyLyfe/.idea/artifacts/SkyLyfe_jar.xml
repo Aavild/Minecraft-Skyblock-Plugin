@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="SkyLyfe:jar">
+    <output-path>$PROJECT_DIR$/../../SpigotTestServer/plugins</output-path>
+    <root id="archive" name="SkyLyfe.jar">
+      <element id="module-output" name="SkyLyfe" />
+    </root>
+  </artifact>
+</component>
