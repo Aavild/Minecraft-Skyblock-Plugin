@@ -1,0 +1,38 @@
+name: SkyLyfe
+main: io.github.aavild.SkyLyfeMain
+version: 1.0.0
+api-version: 1.13
+description: A Skyblock plugin
+load: STARTUP
+author: Aavild
+prefix: SkyL
+
+commands:
+  is:
+    usage: /<command>
+    aliases: island
+    permission-message: You do not have access to that command
+    permission:
+      skylyfe.is
+    children:
+      sssss
+  isadmin:
+    usage: /<command>
+    aliases: islandadmin
+    permission-message: You do not have access to that command
+    permission:
+      skylyfe.admin
+    children:
+      sssss
+permissions:
+  skylyfe.is.*:
+    description: Allows all is commands
+    default: op
+    children:
+      skylyfe.is: true
+  skylife.admin.*:
+    description: Allows use of admincommands
+    default: op
+    children:
+      skylife.admin: true
+
