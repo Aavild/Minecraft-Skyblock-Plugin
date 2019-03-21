@@ -1,12 +1,14 @@
 package io.github.aavild;
 
 import org.bukkit.ChatColor;
+import org.bukkit.block.Biome;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class Commands implements CommandExecutor {
+    IslandManager islandManager;
     String[] cmds =new String[]
             {
                     //Commands
@@ -41,6 +43,7 @@ public class Commands implements CommandExecutor {
                 {
                     if(sender.hasPermission("skylyfe.is.create"))
                     {
+                        islandManager.CreateIsland(player);
                         //Create island
                     }
                     else
@@ -53,6 +56,7 @@ public class Commands implements CommandExecutor {
                 {
                     if(sender.hasPermission("skylyfe.is.delete"))
                     {
+                        islandManager.DeleteIsland(player);
                         //Delete island
                     }
                     else
@@ -78,6 +82,15 @@ public class Commands implements CommandExecutor {
                     if(sender.hasPermission("skylyfe.is.level"))
                     {
                         //Update/Check island level.
+                        float level = islandManager.GetIslandLevel(player);
+                        if(level == -1)
+                        {
+                            sender.sendMessage(ChatColor.RED + "You're not a part of an island");
+                        }
+                        else
+                        {
+                            sender.sendMessage(ChatColor.AQUA + "Island level: " + ChatColor.BLUE + level);
+                        }
                     }
                     else
                     {
@@ -102,6 +115,7 @@ public class Commands implements CommandExecutor {
                     if(sender.hasPermission("skylyfe.is.home"))
                     {
                         //Teleport the player to his island home.
+                        islandManager.TeleportPlayerHome(player);
                     }
                     else
                     {
@@ -113,7 +127,8 @@ public class Commands implements CommandExecutor {
                 {
                     if(sender.hasPermission("skylyfe.is.sethome"))
                     {
-                        //Delete island
+                        //Sets the players islands home if he is owner
+                        islandManager.SetHome(player);
                     }
                     else
                     {
@@ -125,6 +140,19 @@ public class Commands implements CommandExecutor {
                 {
                     if(sender.hasPermission("skylyfe.is.name"))
                     {
+                        if (args.length == 2)
+                        {
+                            islandManager.SetIslandName(player, args[1]);
+                        }
+                        else if (args.length == 1)
+                        {
+                            sender.sendMessage(ChatColor.GOLD + "Usage: /is name [Name]");
+                        }
+                        else
+                        {
+                            sender.sendMessage(ChatColor.GOLD + "Too many arguments. Usage: /is name [Name]");
+                        }
+
                         //Sets the players home
                     }
                     else

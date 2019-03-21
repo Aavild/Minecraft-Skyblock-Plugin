@@ -7,12 +7,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6d0ade3e-855d-46a7-ac43-59b206cbdabb" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/SkyLyfe_jar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/aavild/Island.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/aavild/IslandManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SkyLyfe.iml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/io/github/aavild/Commands.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/aavild/Commands.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/plugin.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/aavild/SkyLyfeMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/aavild/SkyLyfeMain.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -36,8 +35,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/io/github/aavild/SkyLyfeMain.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="8" column="12" selection-start-line="8" selection-start-column="12" selection-end-line="8" selection-end-column="12" />
+            <state relative-caret-position="170">
+              <caret line="10" column="19" selection-start-line="10" selection-start-column="19" selection-end-line="10" selection-end-column="19" />
             </state>
           </provider>
         </entry>
@@ -45,40 +44,35 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/io/github/aavild/Commands.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="258">
-              <caret line="27" column="81" lean-forward="true" selection-start-line="27" selection-start-column="81" selection-end-line="27" selection-end-column="81" />
+            <state relative-caret-position="-3">
+              <caret line="145" column="25" lean-forward="true" selection-start-line="145" selection-start-column="25" selection-end-line="145" selection-end-column="25" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1044#1098#1" />
-                <element signature="e#1500#1624#1" />
-                <element signature="e#1898#2023#1" />
-                <element signature="e#2311#2435#1" />
-                <element signature="e#2724#2848#1" />
-                <element signature="e#3137#3261#1" />
-                <element signature="e#3550#3674#1" />
-                <element signature="e#3963#4087#1" />
-                <element signature="e#4376#4500#1" />
-                <element signature="e#4892#5016#1" />
-                <element signature="e#5339#5463#1" />
-                <element signature="e#5754#5878#1" />
-                <element signature="e#6197#6321#1" />
-                <element signature="e#6622#6746#1" />
-                <element signature="e#7053#7177#1" />
-                <element signature="e#7499#7623#1" />
-                <element signature="e#7919#8043#1" />
-                <element signature="e#8399#8523#1" />
-                <element signature="e#8835#8959#1" />
-                <element signature="e#9277#9401#1" />
-                <element signature="e#9720#9844#1" />
-                <element signature="e#10170#10294#1" />
-                <element signature="e#10662#10786#1" />
-                <element signature="e#11029#11153#1" />
-                <element signature="e#11454#11578#1" />
-                <element signature="e#11905#12029#1" />
-                <element signature="e#12337#12461#1" />
-                <element signature="e#12760#12884#1" />
-                <element signature="e#13187#13311#1" />
-                <element signature="e#13525#13776#1" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/io/github/aavild/Island.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="340">
+              <caret line="20" column="22" selection-start-line="20" selection-start-column="22" selection-end-line="20" selection-end-column="22" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#365#373#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/io/github/aavild/IslandManager.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="454">
+              <caret line="81" column="17" lean-forward="true" selection-start-line="81" selection-start-column="17" selection-end-line="81" selection-end-column="17" />
+              <folding>
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -109,8 +103,10 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/io/github/aavild/SkyLyfeMain.java" />
         <option value="$PROJECT_DIR$/src/main/resources/plugin.yml" />
+        <option value="$PROJECT_DIR$/src/main/java/io/github/aavild/SkyLyfeMain.java" />
+        <option value="$PROJECT_DIR$/src/main/java/io/github/aavild/Island.java" />
+        <option value="$PROJECT_DIR$/src/main/java/io/github/aavild/IslandManager.java" />
         <option value="$PROJECT_DIR$/src/main/java/io/github/aavild/Commands.java" />
       </list>
     </option>
@@ -123,9 +119,9 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-8" />
-    <option name="width" value="977" />
-    <option name="height" value="1088" />
+    <option name="x" value="-10" />
+    <option name="width" value="979" />
+    <option name="height" value="1090" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -133,7 +129,50 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="SkyLyfe" type="b2602c69:ProjectViewProjectNode" />
+              <item name="SkyLyfe" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="SkyLyfe" type="b2602c69:ProjectViewProjectNode" />
+              <item name="SkyLyfe" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="SkyLyfe" type="b2602c69:ProjectViewProjectNode" />
+              <item name="SkyLyfe" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="SkyLyfe" type="b2602c69:ProjectViewProjectNode" />
+              <item name="SkyLyfe" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="SkyLyfe" type="b2602c69:ProjectViewProjectNode" />
+              <item name="SkyLyfe" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="aavild" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="SkyLyfe" type="b2602c69:ProjectViewProjectNode" />
+              <item name="SkyLyfe" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
       <pane id="Scope">
         <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
           <expand>
@@ -197,57 +236,14 @@
           <select />
         </subPane>
       </pane>
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="SkyLyfe" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SkyLyfe" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SkyLyfe" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SkyLyfe" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SkyLyfe" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SkyLyfe" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SkyLyfe" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SkyLyfe" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SkyLyfe" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SkyLyfe" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="aavild" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SkyLyfe" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SkyLyfe" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1553009829011" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../SpigotTestServer/plugins" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1553158600745" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../MobSpawnPlugin" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Project" />
@@ -278,23 +274,24 @@
       <updated>1552998995827</updated>
       <workItem from="1552999000946" duration="3059000" />
       <workItem from="1553002261261" duration="6737000" />
+      <workItem from="1553067505826" duration="4793000" />
+      <workItem from="1553156537488" duration="2600000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="9796000" />
+    <option name="totallyTimeSpent" value="17189000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="878" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18456376" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18993288" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
       <window_info id="UI Designer" order="4" />
       <window_info id="Capture Tool" order="5" />
       <window_info id="Favorites" order="6" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" weight="0.32918397" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" />
@@ -307,6 +304,7 @@
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Terminal" order="10" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
+      <window_info anchor="bottom" id="Messages" order="12" weight="0.32918397" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -322,13 +320,18 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/SkyLyfe.iml">
-      <provider selected="true" editor-type-id="text-editor" />
+    <entry file="file://$PROJECT_DIR$/SkyLyfe.iml" />
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="29" />
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/io/github/aavild/SkyLyfeMain.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="12" selection-start-line="8" selection-start-column="12" selection-end-line="8" selection-end-column="12" />
+        <state relative-caret-position="170">
+          <caret line="10" column="19" selection-start-line="10" selection-start-column="19" selection-end-line="10" selection-end-column="19" />
         </state>
       </provider>
     </entry>
@@ -339,49 +342,33 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/aavild/Island.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="29" />
+        <state relative-caret-position="340">
+          <caret line="20" column="22" selection-start-line="20" selection-start-column="22" selection-end-line="20" selection-end-column="22" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#365#373#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/aavild/IslandManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="454">
+          <caret line="81" column="17" lean-forward="true" selection-start-line="81" selection-start-column="17" selection-end-line="81" selection-end-column="17" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/io/github/aavild/Commands.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="258">
-          <caret line="27" column="81" lean-forward="true" selection-start-line="27" selection-start-column="81" selection-end-line="27" selection-end-column="81" />
+        <state relative-caret-position="-3">
+          <caret line="145" column="25" lean-forward="true" selection-start-line="145" selection-start-column="25" selection-end-line="145" selection-end-column="25" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1044#1098#1" />
-            <element signature="e#1500#1624#1" />
-            <element signature="e#1898#2023#1" />
-            <element signature="e#2311#2435#1" />
-            <element signature="e#2724#2848#1" />
-            <element signature="e#3137#3261#1" />
-            <element signature="e#3550#3674#1" />
-            <element signature="e#3963#4087#1" />
-            <element signature="e#4376#4500#1" />
-            <element signature="e#4892#5016#1" />
-            <element signature="e#5339#5463#1" />
-            <element signature="e#5754#5878#1" />
-            <element signature="e#6197#6321#1" />
-            <element signature="e#6622#6746#1" />
-            <element signature="e#7053#7177#1" />
-            <element signature="e#7499#7623#1" />
-            <element signature="e#7919#8043#1" />
-            <element signature="e#8399#8523#1" />
-            <element signature="e#8835#8959#1" />
-            <element signature="e#9277#9401#1" />
-            <element signature="e#9720#9844#1" />
-            <element signature="e#10170#10294#1" />
-            <element signature="e#10662#10786#1" />
-            <element signature="e#11029#11153#1" />
-            <element signature="e#11454#11578#1" />
-            <element signature="e#11905#12029#1" />
-            <element signature="e#12337#12461#1" />
-            <element signature="e#12760#12884#1" />
-            <element signature="e#13187#13311#1" />
-            <element signature="e#13525#13776#1" />
           </folding>
         </state>
       </provider>
