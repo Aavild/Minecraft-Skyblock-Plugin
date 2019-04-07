@@ -3,7 +3,6 @@ main: io.github.aavild.SkyLyfeMain
 version: 1.0.0
 api-version: 1.13
 description: A Skyblock plugin
-load: STARTUP
 author: Aavild
 prefix: SkyL
 

@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/SkyLyfe.iml" filepath="$PROJECT_DIR$/.idea/SkyLyfe.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SkyLyfe/SkyLyfe.iml" filepath="$PROJECT_DIR$/SkyLyfe/SkyLyfe.iml" />
     </modules>
   </component>
 </project>

@@ -1,14 +1,24 @@
 package io.github.aavild;
 
-import org.bukkit.ChatColor;
+import org.bukkit.*;
 import org.bukkit.block.Biome;
+import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
+import org.bukkit.block.Chest;
+import org.bukkit.block.data.BlockData;
+import org.bukkit.block.data.Directional;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.util.Vector;
 
 public class Commands implements CommandExecutor {
     IslandManager islandManager;
+    Schematic schematic;
+    World skyworld;
     String[] cmds =new String[]
             {
                     //Commands
@@ -24,7 +34,50 @@ public class Commands implements CommandExecutor {
                 Player player = (Player) sender;
                 if (args.length == 0)
                 {
-                    //Island GUI Panel.
+                    ///////teleport to skyblock world
+                    //Location loc = new Location(Bukkit.getWorld("Skyblocks"), 0.0, 0.0, 0.0);
+                    //player.teleport(loc);
+
+                    Material[][][] skyblock = null;
+                    skyblock = schematic.skyblocks().clone();
+                    int[] size = {skyblock.length, skyblock[0].length, skyblock[0][0].length};
+                    Location loc = player.getLocation();
+                    for (int i = 0; i < skyblock.length; i++)
+                    {
+                        for (int i2 = 0; i2 < skyblock[i].length; i2++)
+                        {
+                            for (int i3 = 0; i3 < skyblock[i][i2].length; i3++)
+                            {
+                                Block block = new Location(skyworld, i - size[0] / 2 + loc.getBlockX(), i2 - size[1] / 2 + loc.getBlockY(), i3 - size[2] / 2 + loc.getBlockZ()).getBlock();
+                                block.setType(skyblock[i][i2][i3]);
+                                if (i == 1 && i2 == 3 && i3 == 0)
+                                {
+                                    BlockData blockData = block.getBlockData();
+                                    Directional directional = (Directional) blockData;
+                                    directional.setFacing(BlockFace.SOUTH);
+                                    block.setBlockData(directional);
+                                    Chest chest = (Chest)block.getState();
+                                    Inventory inv = chest.getInventory();
+                                    ItemStack a = new ItemStack(Material.ICE, 2);
+                                    ItemStack b = new ItemStack(Material.LAVA_BUCKET, 1);
+                                    ItemStack c = new ItemStack(Material.PUMPKIN_SEEDS, 1);
+                                    ItemStack d = new ItemStack(Material.WHEAT_SEEDS, 1);
+                                    ItemStack e = new ItemStack(Material.MELON_SEEDS, 1);
+                                    ItemStack f = new ItemStack(Material.BEETROOT_SEEDS, 1);
+                                    ItemStack g = new ItemStack(Material.CARROT, 1);
+                                    ItemStack h = new ItemStack(Material.OAK_SAPLING, 1);
+                                    ItemStack j = new ItemStack(Material.BONE, 3);
+                                    inv.addItem(a, b, c, d, e, f, g, h, j);
+                                }
+                            }
+                        }
+                    }
+                    loc.setY(loc.getBlockY() - 1);
+                    player.teleport(loc);
+
+
+
+                    //Should be Island GUI Panel or island help
                     return true;
                 }
                 if (args[0].equalsIgnoreCase("help") || args[0].equalsIgnoreCase("?"))

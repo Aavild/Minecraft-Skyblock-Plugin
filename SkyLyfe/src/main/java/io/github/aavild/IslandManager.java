@@ -1,6 +1,8 @@
 package io.github.aavild;
 
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.block.Biome;
 import org.bukkit.entity.Player;
 
@@ -8,11 +10,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class IslandManager {
+    World skyworld;
     private List<Island> islands = new ArrayList<Island>();
     Biome standardBiome = Biome.FOREST;
     public void CreateIsland(Player sender)
     {
         Island island = new Island(standardBiome, sender);
+        //Location loc = new Location(skyworld, )
+        //island.islandLocation = Location;
         islands.add(island);
     }
     public void DeleteIsland(Player sender)
