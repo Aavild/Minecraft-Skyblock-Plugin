@@ -18,6 +18,8 @@ public class SkyLyfeMain extends JavaPlugin {
             getCommand(command).setExecutor(commands);
         commands.islandManager = islandManager;
         commands.schematic = schematic;
+        islandManager.islandPositionManager = islandPositionManager;
+        islandManager.schematic = schematic;
         WorldCreator wc = new WorldCreator("Skyblocks");
         wc.generator(new CustomChunkGenerator());
         World skyworld = Bukkit.createWorld(wc);

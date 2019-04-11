@@ -1,5 +1,6 @@
 package io.github.aavild;
 
+import com.sun.org.apache.bcel.internal.generic.RET;
 import org.bukkit.*;
 import org.bukkit.block.Biome;
 import org.bukkit.block.Block;
@@ -34,11 +35,12 @@ public class Commands implements CommandExecutor {
                 Player player = (Player) sender;
                 if (args.length == 0)
                 {
+                    ((Player) sender).teleport(new Location(skyworld, 0, 0, 0));
                     ///////teleport to skyblock world
                     //Location loc = new Location(Bukkit.getWorld("Skyblocks"), 0.0, 0.0, 0.0);
                     //player.teleport(loc);
 
-                    Material[][][] skyblock = null;
+                    /*Material[][][] skyblock = null;
                     skyblock = schematic.skyblocks().clone();
                     int[] size = {skyblock.length, skyblock[0].length, skyblock[0][0].length};
                     Location loc = player.getLocation();
@@ -73,7 +75,7 @@ public class Commands implements CommandExecutor {
                         }
                     }
                     loc.setY(loc.getBlockY() - 1);
-                    player.teleport(loc);
+                    player.teleport(loc);*/
 
 
 
@@ -455,6 +457,7 @@ public class Commands implements CommandExecutor {
                     return true;
                 }
                 sender.sendMessage(ChatColor.YELLOW + "Couldn't find the command, type /is ? for help");
+                return true;
             }
             else
             {

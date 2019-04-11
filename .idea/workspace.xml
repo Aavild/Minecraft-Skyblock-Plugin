@@ -6,33 +6,13 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3c883781-6b0d-4498-a129-8f633378f706" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_code_gson_gson_2_8_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_guava_guava_21_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_googlecode_json_simple_json_simple_1_1_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_lang_commons_lang_2_6.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__junit_junit_4_10.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__net_md_5_bungeecord_chat_1_13_SNAPSHOT.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hamcrest_hamcrest_core_1_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_spigotmc_spigot_api_1_13_2_R0_1_SNAPSHOT.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_yaml_snakeyaml_1_23.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SkyLyfe/SkyLyfe.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SkyLyfe/src/main/java/io/github/aavild/CustomChunkGenerator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SkyLyfe/src/main/java/io/github/aavild/IslandPositionManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SkyLyfe/src/main/java/io/github/aavild/Schematic.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/SkyLyfe_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/SkyLyfe_jar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+    <list default="true" id="3c883781-6b0d-4498-a129-8f633378f706" name="Default Changelist" comment="/is - teleports to skyblock world&#10;/is create - makes an island&#10;/is home - makes a home&#10;/is">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SkyLyfe/src/main/java/io/github/aavild/Commands.java" beforeDir="false" afterPath="$PROJECT_DIR$/SkyLyfe/src/main/java/io/github/aavild/Commands.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SkyLyfe/src/main/java/io/github/aavild/Island.java" beforeDir="false" afterPath="$PROJECT_DIR$/SkyLyfe/src/main/java/io/github/aavild/Island.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SkyLyfe/src/main/java/io/github/aavild/IslandManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/SkyLyfe/src/main/java/io/github/aavild/IslandManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SkyLyfe/src/main/java/io/github/aavild/IslandPositionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/SkyLyfe/src/main/java/io/github/aavild/IslandPositionManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SkyLyfe/src/main/java/io/github/aavild/SkyLyfeMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/SkyLyfe/src/main/java/io/github/aavild/SkyLyfeMain.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SkyLyfe/src/main/resources/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/SkyLyfe/src/main/resources/plugin.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SkyLyfe/target/classes/io/github/aavild/Commands.class" beforeDir="false" afterPath="$PROJECT_DIR$/SkyLyfe/target/classes/io/github/aavild/Commands.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SkyLyfe/target/classes/io/github/aavild/SkyLyfeMain.class" beforeDir="false" afterPath="$PROJECT_DIR$/SkyLyfe/target/classes/io/github/aavild/SkyLyfeMain.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SkyLyfe/target/classes/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/SkyLyfe/target/classes/plugin.yml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/SkyLyfe/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -42,16 +22,15 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="DefaultGradleProjectSettings">
-    <option name="testRunner" value="GRADLE" />
-    <option name="delegatedBuild" value="true" />
+    <option name="isMigrated" value="true" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/SkyLyfe/src/main/java/io/github/aavild/Commands.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="629">
-              <caret line="37" column="77" selection-start-line="37" selection-start-column="77" selection-end-line="37" selection-end-column="77" />
+            <state relative-caret-position="697">
+              <caret line="459" column="28" selection-start-line="459" selection-start-column="28" selection-end-line="459" selection-end-column="28" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -79,20 +58,14 @@
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/SkyLyfe/target/classes/io/github/aavild/Commands.class">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <folding>
-                <element signature="e#0#7552#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/SkyLyfe/src/main/java/io/github/aavild/Island.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="20" column="28" selection-start-line="20" selection-start-column="28" selection-end-line="20" selection-end-column="28" />
+            <state relative-caret-position="340">
+              <caret line="26" column="22" lean-forward="true" selection-start-line="26" selection-start-column="22" selection-end-line="26" selection-end-column="22" />
             </state>
           </provider>
         </entry>
@@ -100,20 +73,20 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/SkyLyfe/src/main/java/io/github/aavild/IslandManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="19" column="25" lean-forward="true" selection-start-line="19" selection-start-column="25" selection-end-line="19" selection-end-column="25" />
+            <state relative-caret-position="-391">
+              <caret line="52" column="21" lean-forward="true" selection-start-line="52" selection-start-column="21" selection-end-line="52" selection-end-column="21" />
               <folding>
-                <element signature="e#250#258#0" expanded="true" />
+                <element signature="e#323#331#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/SkyLyfe/src/main/java/io/github/aavild/IslandPositionManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="714">
-              <caret line="46" column="19" selection-start-line="46" selection-start-column="19" selection-end-line="46" selection-end-column="19" />
+            <state relative-caret-position="136">
+              <caret line="8" column="26" selection-start-line="8" selection-start-column="26" selection-end-line="8" selection-end-column="26" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -124,8 +97,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/SkyLyfe/src/main/java/io/github/aavild/Schematic.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1105">
-              <caret line="85" column="16" lean-forward="true" selection-start-line="85" selection-start-column="16" selection-end-line="85" selection-end-column="25" />
+            <state relative-caret-position="1445">
+              <caret line="85" column="16" selection-start-line="85" selection-start-column="16" selection-end-line="85" selection-end-column="25" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -136,11 +109,13 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/SkyLyfe/src/main/java/io/github/aavild/SkyLyfeMain.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="25" column="50" selection-start-line="25" selection-start-column="50" selection-end-line="25" selection-end-column="50" />
+            <state relative-caret-position="357">
+              <caret line="21" column="44" selection-start-line="21" selection-start-column="44" selection-end-line="21" selection-end-column="44" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#1088#1089#0" expanded="true" />
                 <element signature="e#1144#1145#0" expanded="true" />
+                <element signature="e#1242#1243#0" expanded="true" />
                 <element signature="e#1291#1292#0" expanded="true" />
               </folding>
             </state>
@@ -151,7 +126,7 @@
         <entry file="file://$PROJECT_DIR$/SkyLyfe/src/main/java/io/github/aavild/CustomChunkGenerator.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="493">
-              <caret line="29" lean-forward="true" selection-start-line="29" selection-end-line="29" />
+              <caret line="29" selection-start-line="29" selection-end-line="29" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -178,11 +153,11 @@
         <option value="$PROJECT_DIR$/SkyLyfe/src/main/java/io/github/aavild/CustomChunkGenerator.java" />
         <option value="$PROJECT_DIR$/SkyLyfe/src/main/resources/plugin.yml" />
         <option value="$PROJECT_DIR$/SkyLyfe/src/main/java/io/github/aavild/Schematic.java" />
-        <option value="$PROJECT_DIR$/SkyLyfe/src/main/java/io/github/aavild/Commands.java" />
         <option value="$PROJECT_DIR$/SkyLyfe/src/main/java/io/github/aavild/Island.java" />
         <option value="$PROJECT_DIR$/SkyLyfe/src/main/java/io/github/aavild/SkyLyfeMain.java" />
-        <option value="$PROJECT_DIR$/SkyLyfe/src/main/java/io/github/aavild/IslandManager.java" />
         <option value="$PROJECT_DIR$/SkyLyfe/src/main/java/io/github/aavild/IslandPositionManager.java" />
+        <option value="$PROJECT_DIR$/SkyLyfe/src/main/java/io/github/aavild/IslandManager.java" />
+        <option value="$PROJECT_DIR$/SkyLyfe/src/main/java/io/github/aavild/Commands.java" />
       </list>
     </option>
   </component>
@@ -196,6 +171,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -240,7 +216,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
     </panes>
   </component>
@@ -253,6 +228,9 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../1.13.2/plugins" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Artifacts" />
@@ -308,6 +286,7 @@
       <option name="presentableId" value="Default" />
       <updated>1553175004605</updated>
       <workItem from="1553175005785" duration="60000" />
+      <workItem from="1554991841316" duration="11413000" />
     </task>
     <task id="LOCAL-00001" summary="added artifact">
       <created>1554642223629</created>
@@ -316,24 +295,31 @@
       <option name="project" value="LOCAL" />
       <updated>1554642223629</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="added void generation (note world works but needs custom command to teleport to and I removed that again after use :p)&#10;&#10;Made so /is creates a standard island&#10;&#10;halfway made islandpositioncalculation">
+      <created>1554673502980</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1554673502980</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="23699000" />
+    <option name="totallyTimeSpent" value="35291000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="2576" height="1456" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2535771" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2555644" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Image Layers" order="3" />
       <window_info id="Designer" order="4" />
       <window_info id="UI Designer" order="5" />
       <window_info id="Favorites" order="6" side_tool="true" />
-      <window_info anchor="bottom" id="Inspection Results" weight="0.32955405" />
+      <window_info anchor="bottom" id="Messages" weight="0.32955405" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" />
@@ -346,6 +332,7 @@
       <window_info anchor="bottom" id="Terminal" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="11" />
+      <window_info anchor="bottom" id="Inspection Results" order="12" weight="0.32955405" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -362,7 +349,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="added artifact" />
-    <option name="LAST_COMMIT_MESSAGE" value="added artifact" />
+    <MESSAGE value="added void generation (note world works but needs custom command to teleport to and I removed that again after use :p)&#10;&#10;Made so /is creates a standard island&#10;&#10;halfway made islandpositioncalculation" />
+    <option name="LAST_COMMIT_MESSAGE" value="added void generation (note world works but needs custom command to teleport to and I removed that again after use :p)&#10;&#10;Made so /is creates a standard island&#10;&#10;halfway made islandpositioncalculation" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/.gitattributes">
@@ -378,6 +366,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/SkyLyfe/src/main/resources/plugin.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="10" selection-start-line="12" selection-start-column="10" selection-end-line="12" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/SkyLyfe/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
@@ -386,45 +381,46 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/SkyLyfe/target/classes/io/github/aavild/Commands.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#7552#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SkyLyfe/src/main/resources/plugin.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="10" selection-start-line="12" selection-start-column="10" selection-end-line="12" selection-end-column="10" />
-        </state>
-      </provider>
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/SkyLyfe/src/main/java/io/github/aavild/CustomChunkGenerator.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="493">
-          <caret line="29" lean-forward="true" selection-start-line="29" selection-end-line="29" />
+          <caret line="29" selection-start-line="29" selection-end-line="29" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SkyLyfe/src/main/java/io/github/aavild/SkyLyfeMain.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="21" column="44" selection-start-line="21" selection-start-column="44" selection-end-line="21" selection-end-column="44" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1088#1089#0" expanded="true" />
+            <element signature="e#1144#1145#0" expanded="true" />
+            <element signature="e#1242#1243#0" expanded="true" />
+            <element signature="e#1291#1292#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/SkyLyfe/src/main/java/io/github/aavild/Schematic.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1105">
-          <caret line="85" column="16" lean-forward="true" selection-start-line="85" selection-start-column="16" selection-end-line="85" selection-end-column="25" />
+        <state relative-caret-position="1445">
+          <caret line="85" column="16" selection-start-line="85" selection-start-column="16" selection-end-line="85" selection-end-column="25" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/SkyLyfe/src/main/java/io/github/aavild/Commands.java">
+    <entry file="file://$PROJECT_DIR$/SkyLyfe/src/main/java/io/github/aavild/IslandPositionManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="629">
-          <caret line="37" column="77" selection-start-line="37" selection-start-column="77" selection-end-line="37" selection-end-column="77" />
+        <state relative-caret-position="136">
+          <caret line="8" column="26" selection-start-line="8" selection-start-column="26" selection-end-line="8" selection-end-column="26" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -433,37 +429,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/SkyLyfe/src/main/java/io/github/aavild/Island.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="20" column="28" selection-start-line="20" selection-start-column="28" selection-end-line="20" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SkyLyfe/src/main/java/io/github/aavild/SkyLyfeMain.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="25" column="50" selection-start-line="25" selection-start-column="50" selection-end-line="25" selection-end-column="50" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1144#1145#0" expanded="true" />
-            <element signature="e#1291#1292#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="340">
+          <caret line="26" column="22" lean-forward="true" selection-start-line="26" selection-start-column="22" selection-end-line="26" selection-end-column="22" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/SkyLyfe/src/main/java/io/github/aavild/IslandManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="19" column="25" lean-forward="true" selection-start-line="19" selection-start-column="25" selection-end-line="19" selection-end-column="25" />
+        <state relative-caret-position="-391">
+          <caret line="52" column="21" lean-forward="true" selection-start-line="52" selection-start-column="21" selection-end-line="52" selection-end-column="21" />
           <folding>
-            <element signature="e#250#258#0" expanded="true" />
+            <element signature="e#323#331#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/SkyLyfe/src/main/java/io/github/aavild/IslandPositionManager.java">
+    <entry file="file://$PROJECT_DIR$/SkyLyfe/src/main/java/io/github/aavild/Commands.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="714">
-          <caret line="46" column="19" selection-start-line="46" selection-start-column="19" selection-end-line="46" selection-end-column="19" />
+        <state relative-caret-position="697">
+          <caret line="459" column="28" selection-start-line="459" selection-start-column="28" selection-end-line="459" selection-end-column="28" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
