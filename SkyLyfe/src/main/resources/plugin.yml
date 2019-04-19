@@ -19,4 +19,7 @@ commands:
     permission-message: You do not have access to that command
     permission:
       skylyfe.admin
+permissions:
+  buildanywhere:
+    description: Makes the player able to build anywhere in the island world
 
