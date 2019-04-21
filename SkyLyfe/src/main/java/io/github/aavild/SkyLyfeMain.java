@@ -16,8 +16,10 @@ public class SkyLyfeMain extends JavaPlugin {
     private Schematic schematic = new Schematic();
     private IslandPositionManager islandPositionManager = new IslandPositionManager();
     private IslandProtection islandProtection = new IslandProtection();
-    String world;
-    File f;
+    private GUIEventHandler guiEventHandler = new GUIEventHandler();
+    private GUIManager guiManager = new GUIManager();
+    private String world;
+    private File f;
     @Override
     public void onEnable() {
         LoadConfig();
@@ -26,9 +28,12 @@ public class SkyLyfeMain extends JavaPlugin {
             getCommand(command).setExecutor(commands);
         commands.islandManager = islandManager;
         commands.schematic = schematic;
+        commands.guiManager = guiManager;
         islandManager.islandPositionManager = islandPositionManager;
         islandManager.schematic = schematic;
         islandManager.main = this;
+        guiManager.main = this;
+        guiManager.islandManager = islandManager;
         WorldCreator wc = new WorldCreator(world);
         wc.generator(new CustomChunkGenerator());
         World skyworld = Bukkit.createWorld(wc);
@@ -38,6 +43,9 @@ public class SkyLyfeMain extends JavaPlugin {
         islandProtection.skyworld = skyworld;
         islandProtection.islandManager = islandManager;
         getServer().getPluginManager().registerEvents(islandProtection, this);
+        guiEventHandler.islandManager = islandManager;
+        guiEventHandler.guiManager = guiManager;
+        getServer().getPluginManager().registerEvents(guiEventHandler, this);
     }
     @Override
     public void onDisable() {

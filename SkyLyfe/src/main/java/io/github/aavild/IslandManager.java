@@ -45,7 +45,6 @@ public class IslandManager {
         loc.setY(loc.getBlockY() - 1);
         Island island = new Island(standardBiome, sender, loc);
         loc.setY(loc.getBlockY() + 1);
-        sender.sendMessage("X: " + loc.getBlockX() + " Z: " + loc.getBlockZ());
         Material[][][] skyblock;
         skyblock = schematic.skyblocks().clone();
         int[] size = {skyblock.length, skyblock[0].length, skyblock[0][0].length};
@@ -112,13 +111,13 @@ public class IslandManager {
         {
             islands.remove(remove);
             Location loc = remove.getIslandLocation(skyworld);
-            for (int i = 0; i < IslandSize; i++)
+            for (int i = 0; i < IslandSize + IslandSize % 2; i++)
             {
                 for (int i2 = 0; i2 < 257; i2++)
                 {
-                    for (int i3 = 0; i3 < IslandSize; i3++)
+                    for (int i3 = 0; i3 < IslandSize + IslandSize % 2; i3++)
                     {
-                        Block block = new Location(skyworld, i - IslandSize / 2 + loc.getBlockX(), i2, i3 - IslandSize / 2 + loc.getBlockZ()).getBlock();
+                        Block block = new Location(skyworld, i - IslandSize / 2 - IslandSize % 2 + loc.getBlockX(), i2, i3 - IslandSize / 2 - IslandSize % 2 + loc.getBlockZ()).getBlock();
                         if (block.getType().equals(Material.CHEST))
                         {
                             BlockState bs = block.getState();
@@ -405,6 +404,7 @@ public class IslandManager {
         try
         {
             biome = Biome.valueOf(biomeString.toUpperCase());
+            sender.sendMessage(ChatColor.GREEN + "Changing Biome to: " + ChatColor.BLUE + biomeString);
         }
         catch (IllegalArgumentException e)
         {
@@ -412,32 +412,48 @@ public class IslandManager {
             return;
         }
         island2.SetBiome(biome);
-        for (int i = 0; i < IslandSize; i++)
+        for (int i = 0; i < IslandSize + IslandSize % 2; i++)
         {
             for (int i2 = 0; i2 < 257; i2++)
             {
-                for (int i3 = 0; i3 < IslandSize; i3++)
+                for (int i3 = 0; i3 < IslandSize + IslandSize % 2; i3++)
                 {
-                    Block block = new Location(skyworld, i - IslandSize / 2 + loc.getBlockX(), i2, i3 - IslandSize / 2 + loc.getBlockZ()).getBlock();
+                    Block block = new Location(skyworld, i - IslandSize / 2 - IslandSize % 2 + loc.getBlockX(), i2, i3 - IslandSize / 2 - IslandSize % 2 + loc.getBlockZ()).getBlock();
                     block.setBiome(biome);
                 }
             }
         }
     }
-    void IslandTop(Player sender)
+    List<String> IslandTop(Player sender)
     {
-        StringBuilder s = new StringBuilder();
+        List<String> s = new ArrayList<String>();
         for (Island island : islands)
         {
             if (island == null)
                 continue;
-            s.append(ChatColor.GREEN +"" + Bukkit.getServer().getOfflinePlayer(island.owner).getName() + ": " + ChatColor.LIGHT_PURPLE + island.GetLevel() +"\n");
+            island.GetLevel();
+            s.add(ChatColor.GREEN +"" + Bukkit.getServer().getOfflinePlayer(island.owner).getName() + ": " + ChatColor.LIGHT_PURPLE + island.GetLevel());
         }
-        if (s.length() == 0)
+        if (s.size() == 1 && s.get(0) == null)
         {
             sender.sendMessage(ChatColor.YELLOW + "There's currently no islands");
-            return;
+            return null;
         }
-        sender.sendMessage(ChatColor.DARK_GRAY + "----------" + ChatColor.BLUE + "Island top" + ChatColor.DARK_GRAY + "----------\n" + s);
+        return s;
+    }
+    List<String> GetMembers(Player sender)
+    {
+        List<String> members = new ArrayList<String>();
+        for (Island island : islands)
+        {
+            if (island.members.contains(sender.getUniqueId()))
+            {
+                for (UUID uuid : island.members)
+                {
+                    members.add(ChatColor.LIGHT_PURPLE + main.getServer().getOfflinePlayer(uuid).getName());
+                }
+            }
+        }
+        return members;
     }
 }

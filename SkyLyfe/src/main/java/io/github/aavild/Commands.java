@@ -1,25 +1,18 @@
 package io.github.aavild;
 
-import com.sun.org.apache.bcel.internal.generic.RET;
 import org.bukkit.*;
-import org.bukkit.block.Biome;
-import org.bukkit.block.Block;
-import org.bukkit.block.BlockFace;
-import org.bukkit.block.Chest;
-import org.bukkit.block.data.BlockData;
-import org.bukkit.block.data.Directional;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.util.Vector;
+
+import java.util.List;
 
 public class Commands implements CommandExecutor {
     IslandManager islandManager;
     Schematic schematic;
     World skyworld;
+    GUIManager guiManager;
     String[] cmds =new String[]
             {
                     //Commands
@@ -35,11 +28,7 @@ public class Commands implements CommandExecutor {
                 Player player = (Player) sender;
                 if (args.length == 0)
                 {
-                    ((Player) sender).teleport(new Location(skyworld, 0, 64, 0));
-                    ///////teleport to skyblock world
-                    //Location loc = new Location(Bukkit.getWorld("Skyblocks"), 0.0, 0.0, 0.0);
-                    //player.teleport(loc);
-
+                    guiManager.NewInventory(player, Inventype.Island);
                     return true;
                 }
                 if (args[0].equalsIgnoreCase("help") || args[0].equalsIgnoreCase("?"))
@@ -118,7 +107,12 @@ public class Commands implements CommandExecutor {
                 {
                     if(sender.hasPermission("skylyfe.is.top"))
                     {
-                        islandManager.IslandTop(player);
+                        List<String> islandTop = islandManager.IslandTop(player);
+                        sender.sendMessage(ChatColor.DARK_GRAY + "---------- " + ChatColor.BLUE + "Island top" + ChatColor.DARK_GRAY + " ----------");
+                        for (String s : islandTop)
+                        {
+                            sender.sendMessage(ChatColor.YELLOW + s);
+                        }
                         //Open is top GUI
                     }
                     else
@@ -194,6 +188,7 @@ public class Commands implements CommandExecutor {
                 {
                     if(sender.hasPermission("skylyfe.is.team"))
                     {
+                        guiManager.NewInventory(player, Inventype.Team);
                         //Open island team GUI
                     }
                     else
