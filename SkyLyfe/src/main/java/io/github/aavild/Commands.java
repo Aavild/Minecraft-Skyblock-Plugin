@@ -1,14 +1,18 @@
 package io.github.aavild;
 
-import org.bukkit.ChatColor;
-import org.bukkit.block.Biome;
+import org.bukkit.*;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.List;
+
 public class Commands implements CommandExecutor {
     IslandManager islandManager;
+    Schematic schematic;
+    World skyworld;
+    GUIManager guiManager;
     String[] cmds =new String[]
             {
                     //Commands
@@ -24,7 +28,7 @@ public class Commands implements CommandExecutor {
                 Player player = (Player) sender;
                 if (args.length == 0)
                 {
-                    //Island GUI Panel.
+                    guiManager.NewInventory(player, Inventype.Island);
                     return true;
                 }
                 if (args[0].equalsIgnoreCase("help") || args[0].equalsIgnoreCase("?"))
@@ -69,6 +73,12 @@ public class Commands implements CommandExecutor {
                 {
                     if(sender.hasPermission("skylyfe.is.biome"))
                     {
+                        if (args.length < 2)
+                        {
+                            sender.sendMessage(ChatColor.GOLD + "Usage: /is name [Name]");
+                            return true;
+                        }
+                        islandManager.SetBiome(player, args[1]);
                         //Open island Biome GUI.
                     }
                     else
@@ -84,13 +94,8 @@ public class Commands implements CommandExecutor {
                         //Update/Check island level.
                         float level = islandManager.GetIslandLevel(player);
                         if(level == -1)
-                        {
-                            sender.sendMessage(ChatColor.RED + "You're not a part of an island");
-                        }
-                        else
-                        {
-                            sender.sendMessage(ChatColor.AQUA + "Island level: " + ChatColor.BLUE + level);
-                        }
+                            return true;
+                        sender.sendMessage(ChatColor.AQUA + "Island level: " + ChatColor.BLUE + level);
                     }
                     else
                     {
@@ -102,6 +107,12 @@ public class Commands implements CommandExecutor {
                 {
                     if(sender.hasPermission("skylyfe.is.top"))
                     {
+                        List<String> islandTop = islandManager.IslandTop(player);
+                        sender.sendMessage(ChatColor.DARK_GRAY + "---------- " + ChatColor.BLUE + "Island top" + ChatColor.DARK_GRAY + " ----------");
+                        for (String s : islandTop)
+                        {
+                            sender.sendMessage(ChatColor.YELLOW + s);
+                        }
                         //Open is top GUI
                     }
                     else
@@ -177,19 +188,8 @@ public class Commands implements CommandExecutor {
                 {
                     if(sender.hasPermission("skylyfe.is.team"))
                     {
+                        guiManager.NewInventory(player, Inventype.Team);
                         //Open island team GUI
-                    }
-                    else
-                    {
-                        sender.sendMessage(ChatColor.RED + "You don't have access to that command");
-                    }
-                    return true;
-                }
-                if (args[0].equalsIgnoreCase("invite"))
-                {
-                    if(sender.hasPermission("skylyfe.is.invite"))
-                    {
-                        //invites another player to the players island
                     }
                     else
                     {
@@ -201,6 +201,7 @@ public class Commands implements CommandExecutor {
                 {
                     if(sender.hasPermission("skylyfe.is.leave"))
                     {
+                        islandManager.Leave(player);
                         //the player leaves his island
                     }
                     else
@@ -281,11 +282,20 @@ public class Commands implements CommandExecutor {
                     }
                     return true;
                 }
-                if (args[0].equalsIgnoreCase("coop"))
+                if (args[0].equalsIgnoreCase("coop") || args[0].equalsIgnoreCase("invite"))
                 {
                     if(sender.hasPermission("skylyfe.is.coop"))
                     {
                         //adds another player to the players island team
+                        Player cooped = Bukkit.getServer().getPlayer(args[1]);
+                        if (cooped != null)
+                        {
+                            islandManager.CoopPlayer(player, cooped);
+                        }
+                        else
+                        {
+                            sender.sendMessage(ChatColor.RED + "Couldn't find the player");
+                        }
                     }
                     else
                     {
@@ -309,6 +319,7 @@ public class Commands implements CommandExecutor {
                 {
                     if(sender.hasPermission("skylyfe.is.listcoops"))
                     {
+                        islandManager.ListMembers(player);
                         //displays a list of players the player has added to his island team
                     }
                     else
@@ -369,6 +380,7 @@ public class Commands implements CommandExecutor {
                 {
                     if(sender.hasPermission("skylyfe.is.accept"))
                     {
+                        islandManager.AcceptCoop(player);
                         //accepts the island team invite
                     }
                     else
@@ -381,6 +393,7 @@ public class Commands implements CommandExecutor {
                 {
                     if(sender.hasPermission("skylyfe.is.reject"))
                     {
+                        islandManager.RejectCoop(player);
                         //reject the island team invite
                     }
                     else
@@ -402,6 +415,7 @@ public class Commands implements CommandExecutor {
                     return true;
                 }
                 sender.sendMessage(ChatColor.YELLOW + "Couldn't find the command, type /is ? for help");
+                return true;
             }
             else
             {

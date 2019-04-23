@@ -3,7 +3,6 @@ main: io.github.aavild.SkyLyfeMain
 version: 1.0.0
 api-version: 1.13
 description: A Skyblock plugin
-load: STARTUP
 author: Aavild
 prefix: SkyL
 
@@ -20,4 +19,7 @@ commands:
     permission-message: You do not have access to that command
     permission:
       skylyfe.admin
+permissions:
+  buildanywhere:
+    description: Makes the player able to build anywhere in the island world
 

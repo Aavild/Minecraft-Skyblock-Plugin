@@ -1,0 +1,20 @@
+
+
+
+
+###          SkyLyfe Config          ###
+
+
+#Enable GUI when it gets added to the plugin
+#Note that this does currently not do anything and is merely for when it gets added
+EnableGUI: true
+#The name of the world which is also shown in the server directory
+SkyworldName: Skyblocks
+
+
+
+
+#The size of the island
+IslandSize: 129
+#The Distance between each island
+IslandDistance: 5
