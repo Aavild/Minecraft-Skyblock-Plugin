@@ -70,24 +70,30 @@ public class GUIManager {
             Item item = new Item(Material.BOOK,ChatColor.GOLD + "Go back", description, 6, 1);
             description.clear();
             items.add(item);
-            if (player.hasPermission("skylyfe.is.accept"))
+            if (islandManager.HasInvite(player))
             {
-                item = new Item(Material.EMERALD_BLOCK,ChatColor.GOLD + "Accept invite", description, 3, 4);
-                description.clear();
-                items.add(item);
+                if (player.hasPermission("skylyfe.is.accept"))
+                {
+                    item = new Item(Material.EMERALD_BLOCK,ChatColor.GOLD + "Accept invite", description, 3, 4);
+                    description.clear();
+                    items.add(item);
+                }
+                if (player.hasPermission("skylyfe.is.reject"))
+                {
+                    item = new Item(Material.REDSTONE_BLOCK,ChatColor.GOLD + "Reject invite", description, 3, 6);
+                    description.clear();
+                    items.add(item);
+                }
             }
-            if (player.hasPermission("skylyfe.is.reject"))
+            else
             {
-                item = new Item(Material.REDSTONE_BLOCK,ChatColor.GOLD + "Reject invite", description, 3, 6);
-                description.clear();
-                items.add(item);
-            }
-            if (player.hasPermission("skylyfe.is.listcoops"))
-            {
-                description = islandManager.GetMembers(player);
-                item = new Item(Material.PLAYER_HEAD,ChatColor.GOLD + "Members", description, 2, 2);
-                description.clear();
-                items.add(item);
+                if (player.hasPermission("skylyfe.is.listcoops"))
+                {
+                    description = islandManager.GetMembers(player);
+                    item = new Item(Material.PLAYER_HEAD,ChatColor.GOLD + "Members", description, 2, 2);
+                    description.clear();
+                    items.add(item);
+                }
             }
         }
         if (inventype.equals(Inventype.Biome))

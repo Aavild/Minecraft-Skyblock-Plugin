@@ -1,5 +1,6 @@
 package io.github.aavild;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -79,6 +80,26 @@ public class GUIEventHandler implements Listener {
 
                 player.closeInventory();
                 return;
+            }
+        }
+        if (invView.getTitle().equals(ChatColor.GREEN + Inventype.Biome.name()))
+        {
+            event.setCancelled(true);
+            if (inv.equals(invView.getTopInventory()))
+            {
+                if (item == null)
+                    return;
+                if (!item.hasItemMeta())
+                    return;
+                if (item.getItemMeta().getDisplayName().equals(ChatColor.GOLD + "Go back"))
+                {
+                    guiManager.NewInventory(player, Inventype.Island);
+                    return;
+                }
+                String s = ChatColor.stripColor(ChatColor.translateAlternateColorCodes('&', item.getItemMeta().getDisplayName()));
+                s = s.replaceAll(" ", "_");
+                player.closeInventory();
+                islandManager.SetBiome(player, s);
             }
         }
     }

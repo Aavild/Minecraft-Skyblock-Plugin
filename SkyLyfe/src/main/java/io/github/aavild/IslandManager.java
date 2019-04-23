@@ -25,7 +25,7 @@ public class IslandManager {
     Schematic schematic;
     SkyLyfeMain main;
     int IslandSize = 129;
-    public void CreateIsland(Player sender)
+    void CreateIsland(Player sender)
     {
         int islandNumber = islands.size();
         for (Island island : islands)
@@ -89,7 +89,7 @@ public class IslandManager {
         main.Save();
         sender.sendMessage(ChatColor.GREEN + "Created island");
     }
-    public void DeleteIsland(Player sender)
+    void DeleteIsland(Player sender)
     {
         Island remove = null;
         for (Island island : islands)
@@ -113,7 +113,7 @@ public class IslandManager {
             Location loc = remove.getIslandLocation(skyworld);
             for (int i = 0; i < IslandSize + IslandSize % 2; i++)
             {
-                for (int i2 = 0; i2 < 257; i2++)
+                for (int i2 = 0; i2 < 256; i2++)
                 {
                     for (int i3 = 0; i3 < IslandSize + IslandSize % 2; i3++)
                     {
@@ -136,7 +136,7 @@ public class IslandManager {
         }
         main.Save();
     }
-    public float GetIslandLevel(Player sender)
+    float GetIslandLevel(Player sender)
     {
         for (Island island : islands)
         {
@@ -166,7 +166,7 @@ public class IslandManager {
         sender.sendMessage(ChatColor.RED + "You're not a member of an island");
         return -1;
     }
-    public void TeleportPlayerHome(Player sender)
+    void TeleportPlayerHome(Player sender)
     {
         for (Island island : islands)
         {
@@ -180,7 +180,7 @@ public class IslandManager {
         }
         sender.sendMessage(ChatColor.RED + "You're not a member of an island");
     }
-    public void SetHome(Player sender)
+    void SetHome(Player sender)
     {
         for (Island island : islands)
         {
@@ -202,7 +202,7 @@ public class IslandManager {
         }
         sender.sendMessage(ChatColor.RED + "You're not a member of an island");
     }
-    public void SetIslandName (Player sender, String name)
+    void SetIslandName (Player sender, String name)
     {
         for (Island island : islands)
         {
@@ -224,7 +224,7 @@ public class IslandManager {
         }
         sender.sendMessage(ChatColor.RED + "You're not a member of an island");
     }
-    public Location GetPlayerIslandLocation(Player player)
+    Location GetPlayerIslandLocation(Player player)
     {
         for (Island island : islands)
         {
@@ -455,5 +455,43 @@ public class IslandManager {
             }
         }
         return members;
+    }
+    boolean HasInvite(Player sender)
+    {
+        for (IslandCoopInvite invite : invites)
+        {
+            if (invite.player.equals(sender))
+                return true;
+        }
+        return false;
+    }
+    void RemoveCoop(Player sender, UUID uuid)
+    {
+        for (Island island : islands)
+        {
+            if (island.members.contains(sender.getUniqueId()))
+            {
+                if (island.owner.equals(sender.getUniqueId()))
+                {
+                    if (island.members.contains(uuid))
+                    {
+                        sender.sendMessage(ChatColor.GREEN + "Removed " + main.getServer().getOfflinePlayer(uuid).getName() + " from your island");
+                        island.members.remove(uuid);
+                        return;
+                    }
+                    else
+                    {
+                        sender.sendMessage(ChatColor.RED + "That player isn't a part of your island");
+                        return;
+                    }
+                }
+                else
+                {
+                    sender.sendMessage(ChatColor.RED + "You're not the owner of your island");
+                    return;
+                }
+            }
+        }
+        sender.sendMessage(ChatColor.RED + "You're not a member of an island");
     }
 }

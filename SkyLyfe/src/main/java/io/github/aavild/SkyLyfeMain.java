@@ -29,6 +29,7 @@ public class SkyLyfeMain extends JavaPlugin {
         commands.islandManager = islandManager;
         commands.schematic = schematic;
         commands.guiManager = guiManager;
+        commands.main = this;
         islandManager.islandPositionManager = islandPositionManager;
         islandManager.schematic = schematic;
         islandManager.main = this;

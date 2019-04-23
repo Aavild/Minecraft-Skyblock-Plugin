@@ -13,6 +13,7 @@ public class Commands implements CommandExecutor {
     Schematic schematic;
     World skyworld;
     GUIManager guiManager;
+    SkyLyfeMain main;
     String[] cmds =new String[]
             {
                     //Commands
@@ -287,7 +288,7 @@ public class Commands implements CommandExecutor {
                     if(sender.hasPermission("skylyfe.is.coop"))
                     {
                         //adds another player to the players island team
-                        Player cooped = Bukkit.getServer().getPlayer(args[1]);
+                        Player cooped = main.getServer().getPlayer(args[1]);
                         if (cooped != null)
                         {
                             islandManager.CoopPlayer(player, cooped);
@@ -307,6 +308,20 @@ public class Commands implements CommandExecutor {
                 {
                     if(sender.hasPermission("skylyfe.is.uncoop"))
                     {
+                        if (args.length == 1)
+                        {
+                            sender.sendMessage(ChatColor.YELLOW + "Usage: /is uncoop [member]");
+                        }
+                        else
+                        {
+                            Player target = main.getServer().getPlayer(args[1]);
+                            if (target == null)
+                            {
+                                sender.sendMessage(ChatColor.YELLOW + args[1] + ChatColor.RED + " doesn't exist");
+                                return true;
+                            }
+                            islandManager.RemoveCoop(player, target.getUniqueId());
+                        }
                         //removes another player from the players island team
                     }
                     else
