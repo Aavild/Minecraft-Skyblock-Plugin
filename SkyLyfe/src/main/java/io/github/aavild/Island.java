@@ -25,7 +25,7 @@ public class Island implements Serializable {
 
     String IslandName;
     private Biome biome;
-    private float level = 0;
+    private int level = 0;
     boolean locked = false;
 
     public Island(Biome biome, Player player, Location location)
@@ -42,11 +42,11 @@ public class Island implements Serializable {
         islandHomeDirect[0] = location.getYaw();
         islandHomeDirect[1] = location.getPitch();
     }
-    public void UpdateLevel(float level)
+    public void UpdateLevel(int level)
     {
         this.level = level;
     }
-    public float GetLevel()
+    public int GetLevel()
     {
         return level;
     }

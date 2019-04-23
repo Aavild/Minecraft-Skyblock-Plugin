@@ -145,18 +145,19 @@ public class IslandManager {
             if (island.members.contains(sender.getUniqueId()))
             {
                 Location loc = island.getIslandLocation(skyworld);
-                float level = 0;
+                int level = 0;
                 for (int i = 0; i < IslandSize; i++)
                 {
-                    for (int i2 = 0; i2 < 257; i2++)
+                    for (int i2 = 0; i2 < 256; i2++)
                     {
                         for (int i3 = 0; i3 < IslandSize; i3++)
                         {
                             Block block = new Location(skyworld, i - IslandSize / 2 + loc.getBlockX(), i2, i3 - IslandSize / 2 + loc.getBlockZ()).getBlock();
-                            if (!block.getType().equals(Material.AIR))
+                            if (!(block.getType().equals(Material.AIR)))
                                 level +=1;
                         }
                     }
+                    sender.sendMessage("" + level);
                 }
                 island.UpdateLevel(level);
                 return level;
@@ -431,7 +432,6 @@ public class IslandManager {
         {
             if (island == null)
                 continue;
-            island.GetLevel();
             s.add(ChatColor.GREEN +"" + Bukkit.getServer().getOfflinePlayer(island.owner).getName() + ": " + ChatColor.LIGHT_PURPLE + island.GetLevel());
         }
         if (s.size() == 1 && s.get(0) == null)
