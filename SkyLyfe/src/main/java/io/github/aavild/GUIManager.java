@@ -104,7 +104,7 @@ public class GUIManager {
             items.add(item);
             item = new Item(Material.OAK_SAPLING,ChatColor.GOLD + "Flower Forest", description, 1, 3);
             items.add(item);
-            item = new Item(Material.SPRUCE_LOG,ChatColor.GOLD + "Forest", description, 1, 4);
+            item = new Item(Material.OAK_LOG,ChatColor.GOLD + "Forest", description, 1, 4);
             items.add(item);
             item = new Item(Material.LILY_PAD,ChatColor.GOLD + "Svamp", description, 1, 5);
             items.add(item);
