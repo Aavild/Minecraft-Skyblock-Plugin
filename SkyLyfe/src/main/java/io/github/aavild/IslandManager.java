@@ -2,16 +2,8 @@ package io.github.aavild;
 
 import org.bukkit.*;
 import org.bukkit.block.*;
-import org.bukkit.block.data.BlockData;
-import org.bukkit.block.data.Directional;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemStack;
-import sun.management.Sensor;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -42,11 +34,36 @@ public class IslandManager {
             }
         }
         Location loc = islandPositionManager.location(islandNumber, sender);
-        loc.setY(loc.getBlockY() - 1);
-        Island island = new Island(standardBiome, sender, loc);
-        loc.setY(loc.getBlockY() + 1);
-        Material[][][] skyblock;
-        skyblock = schematic.skyblocks().clone();
+        Location home = schematic.CreateIsland(skyworld, loc, main);
+        Island island = new Island(standardBiome, sender, home, loc);
+        /*BlockData[][][] schematic = schematic.Getschematic(main);
+        //creates a schematic
+        int[] size = {schematic.length, schematic[0].length, schematic[0][0].length};
+        for (int i = 0; i < schematic.length; i++)
+        {
+            for (int i2 = 0; i2 < schematic[i].length; i2++)
+            {
+                for (int i3 = 0; i3 < schematic[i][i2].length; i3++)
+                {
+                    Block block = new Location(skyworld, i - size[0] / 2 + loc.getBlockX(), i2 - size[1] / 2 + loc.getBlockY(), i3 - size[2] / 2 + loc.getBlockZ()).getBlock();
+                    //block.setType(schematic[i][i2][i3].getType());
+                    block.setBlockData(schematic[i][i2][i3]);
+                    //block.setBlockData(schematic[i][i2][i3].getBlockData());
+                    /*if (schematic[i][i2][i3].getState() instanceof Container)
+                    {
+                        Container c = (Container) block.getState();
+                        Container c2 = (Container) schematic[i][i2][i3].getState();
+                        c.getInventory().setContents(c2.getInventory().getContents());
+                    }
+                }
+            }
+        }*/
+
+
+
+
+
+        /*Material[][][] skyblock = schematic.skyblocks().clone();
         int[] size = {skyblock.length, skyblock[0].length, skyblock[0][0].length};
         for (int i = 0; i < skyblock.length; i++)
         {
@@ -79,14 +96,14 @@ public class IslandManager {
                 }
             }
         }
-        sender.teleport(island.getHomeLocation(skyworld));
+        sender.teleport(island.getHomeLocation(skyworld));*/
 
         if (islands.contains(null))
             islands.set(islands.indexOf(null), island);
         else
             islands.add(island);
 
-        main.Save();
+        main.SaveIslands();
         sender.sendMessage(ChatColor.GREEN + "Created island");
     }
     void DeleteIsland(Player sender)
@@ -134,7 +151,7 @@ public class IslandManager {
         {
             sender.sendMessage(ChatColor.YELLOW + "You're not a member of an island");
         }
-        main.Save();
+        main.SaveIslands();
     }
     float GetIslandLevel(Player sender)
     {
@@ -191,7 +208,7 @@ public class IslandManager {
                 if (island.owner.equals(sender.getUniqueId()))
                 {
                     island.setHomeLocation(sender.getLocation());
-                    main.Save();
+                    main.SaveIslands();
                 }
                 else
                 {
@@ -213,7 +230,7 @@ public class IslandManager {
                 if (island.owner.equals(sender.getUniqueId()))
                 {
                     island.IslandName = name;
-                    main.Save();
+                    main.SaveIslands();
                 }
                 else
                 {

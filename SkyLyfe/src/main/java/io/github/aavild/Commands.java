@@ -1,20 +1,30 @@
 package io.github.aavild;
 
 import org.bukkit.*;
+import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
+import org.bukkit.block.Chest;
+import org.bukkit.block.Container;
+import org.bukkit.block.data.BlockData;
+import org.bukkit.block.data.Directional;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.List;
 
 public class Commands implements CommandExecutor {
     IslandManager islandManager;
-    Schematic schematic;
     World skyworld;
     GUIManager guiManager;
     SkyLyfeMain main;
-    String[] cmds =new String[]
+    WandCreator wandCreator;
+    WandHandler wandHandler;
+    SchematicManager schematicManager;
+    String[] cmds = new String[]
             {
                     //Commands
                     "is",
@@ -446,21 +456,71 @@ public class Commands implements CommandExecutor {
                 return true;
             }
         }
-        if (cmd.getName().equalsIgnoreCase(cmds[0]))
+        if (cmd.getName().equalsIgnoreCase(cmds[1]))
         {
-            if (args.length == 0)
+            if (sender instanceof Player)
             {
-                //Shows list of admin commands
-            }
-            if (args[0].equalsIgnoreCase("remove"))
-            {
-                if (sender.hasPermission("skylyfe.admin.remove"))
+                Player player = (Player) sender;
+                if (args.length == 0)
                 {
+                    //Shows list of admin commands
+                    return true;
+                }
+                if (args[0].equalsIgnoreCase("remove"))
+                {
+                    if (sender.hasPermission("skylyfe.admin.remove"))
+                    {
 
+                    }
+                }
+                if (args[0].equalsIgnoreCase("wand"))
+                {
+                    if(sender.hasPermission("skylyfe.admin.wand"))
+                    {
+                        ItemStack wand = wandCreator.CreateWand();
+                        player.getInventory().addItem(wand);
+                        //Gives the player a wand
+                    }
+                    else
+                    {
+                        sender.sendMessage(ChatColor.RED + "You don't have access to that command");
+                    }
+                    return true;
+                }
+                if (args[0].equalsIgnoreCase("schematic"))
+                {
+                    if (args.length == 1)
+                    {
+                        sender.sendMessage(ChatColor.GOLD + "Usage: /isadmin schematic [Name]");
+                        return true;
+                    }
+                    if(sender.hasPermission("skylyfe.admin.schematic"))
+                    {
+                        Location[] locs = wandHandler.GetLocation(player);
+                        if (locs == null)
+                        {
+                            sender.sendMessage(ChatColor.RED + "You haven't marked any locations yet. Use /isadmin wand to get a wand");
+                            return true;
+                        }
+                        if (locs[0] == null || locs[1] == null)
+                        {
+                            sender.sendMessage(ChatColor.RED + "You have only marked 1 position");
+                            return true;
+                        }
+                        schematicManager.CreateSchematic(locs[0], locs[1], args[1], player.getLocation());
+                        sender.sendMessage(ChatColor.GREEN + "Created Schematic");
+                    }
+                    else
+                    {
+                        sender.sendMessage(ChatColor.RED + "You don't have access to that command");
+                    }
+                    return true;
                 }
             }
+            sender.sendMessage("Not for console yet");
+            return true;
         }
-            return false;
+        return false;
     }
 
 }

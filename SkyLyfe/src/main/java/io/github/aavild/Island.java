@@ -21,26 +21,23 @@ public class Island implements Serializable {
     private float[] islandHomeDirect = new float[2];
 
     //Location islandLocation;
-    private double[] islandLocationCoords;
+    private double[] islandLocationCoords = new double[3];
 
     String IslandName;
     private Biome biome;
     private int level = 0;
     boolean locked = false;
 
-    public Island(Biome biome, Player player, Location location)
+    public Island(Biome biome, Player player, Location islandHome, Location location)
     {
         this.biome = biome;
         owner = player.getUniqueId();
         members.add(player.getUniqueId());
-        islandHomeCoords[0] = location.getX();
-        islandHomeCoords[1] = location.getY();
-        islandHomeCoords[2] = location.getZ();
-        islandLocationCoords = islandHomeCoords.clone();
-        islandLocationCoords[1] += 1;
+        setHomeLocation(islandHome);
 
-        islandHomeDirect[0] = location.getYaw();
-        islandHomeDirect[1] = location.getPitch();
+        islandLocationCoords[0] = location.getBlockX();
+        islandLocationCoords[1] = location.getBlockY();
+        islandLocationCoords[2] = location.getBlockZ();
     }
     public void UpdateLevel(int level)
     {

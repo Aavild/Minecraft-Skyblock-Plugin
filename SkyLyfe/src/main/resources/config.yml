@@ -18,3 +18,5 @@ SkyworldName: Skyblocks
 IslandSize: 129
 #The Distance between each island
 IslandDistance: 5
+#The schematic name for island creation
+Schematic: default
