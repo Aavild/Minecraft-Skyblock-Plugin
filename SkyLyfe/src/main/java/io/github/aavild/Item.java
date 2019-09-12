@@ -5,7 +5,6 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class Item {
@@ -18,7 +17,7 @@ public class Item {
         placement = row * 9 + column - 10;
         if (itemMeta == null)
         {
-            Bukkit.getServer().broadcastMessage("An erorr occured");
+            Bukkit.getServer().broadcastMessage("An error occured");
         }
         itemMeta.setDisplayName(name);
         itemMeta.setLore(description);

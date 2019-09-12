@@ -1,11 +1,9 @@
 package io.github.aavild;
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
@@ -18,7 +16,6 @@ public class GUIEventHandler implements Listener {
     public void InvenClick(InventoryClickEvent event)
     {
         Player player = (Player) event.getWhoClicked();
-        ClickType click = event.getClick();
         Inventory inv = event.getClickedInventory();
         InventoryView invView = event.getView();
         ItemStack item = event.getCurrentItem();
@@ -35,7 +32,7 @@ public class GUIEventHandler implements Listener {
                     return;
                 if (item.getItemMeta().getDisplayName().equals(ChatColor.GOLD + "Create island"))
                     islandManager.CreateIsland(player);
-                else if (item.getItemMeta().getDisplayName().equals(ChatColor.GOLD + "Delete island"))
+                else if (item.getItemMeta().getDisplayName().equals(ChatColor.GOLD + "Delete Island"))
                     islandManager.DeleteIsland(player);
                 else if (item.getItemMeta().getDisplayName().equals(ChatColor.GOLD + "Home"))
                     islandManager.TeleportPlayerHome(player);
@@ -46,13 +43,18 @@ public class GUIEventHandler implements Listener {
                     guiManager.NewInventory(player, Inventype.Team);
                     return;
                 }
-                else if (item.getItemMeta().getDisplayName().equals(ChatColor.GOLD + "Island top"))
+                else if (item.getItemMeta().getDisplayName().equals(ChatColor.GOLD + "Island Top"))
+                {
+                    guiManager.NewInventory(player, Inventype.IslandTop);
                     return;
+                }
                 else if (item.getItemMeta().getDisplayName().equals(ChatColor.GOLD + "Island biome"))
                 {
                     guiManager.NewInventory(player, Inventype.Biome);
                     return;
                 }
+                else if (item.getItemMeta().getDisplayName().equals(ChatColor.GOLD + "Rank"))
+                    islandManager.RankUpIsland(player);
                 player.closeInventory();
                 return;
             }
@@ -72,9 +74,9 @@ public class GUIEventHandler implements Listener {
                     return;
                 }
                 else if (item.getItemMeta().getDisplayName().equals(ChatColor.GOLD + "Accept invite"))
-                    islandManager.AcceptCoop(player);
+                    islandManager.AcceptInvite(player);
                 else if (item.getItemMeta().getDisplayName().equals(ChatColor.GOLD + "Reject invite"))
-                    islandManager.RejectCoop(player);
+                    islandManager.RejectInvite(player);
                 else if (item.getItemMeta().getDisplayName().equals(ChatColor.GOLD + "Members"))
                     return;
 
@@ -101,6 +103,10 @@ public class GUIEventHandler implements Listener {
                 player.closeInventory();
                 islandManager.SetBiome(player, s);
             }
+        }
+        if (invView.getTitle().equals(ChatColor.BLUE + "Island Top"))
+        {
+            event.setCancelled(true);
         }
     }
 }

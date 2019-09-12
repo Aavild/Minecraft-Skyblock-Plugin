@@ -1,16 +1,23 @@
 package io.github.aavild;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
+import java.util.logging.Level;
 
 public class GUIManager {
     SkyLyfeMain main;
     IslandManager islandManager;
+    List<Integer> islandsizes;
+    List<Integer> islandprices;
+    boolean enabledDifferentSizes = false;
     public void NewInventory(Player player, Inventype inventype)
     {
         Inventory i = main.getServer().createInventory(null, 54, ChatColor.GREEN + inventype.name());
@@ -20,13 +27,13 @@ public class GUIManager {
         {
             if (player.hasPermission("skylyfe.is.create"))
             {
-                Item item = new Item(Material.GRASS_BLOCK,ChatColor.GOLD + "Create island", description, 3, 4);
+                Item item = new Item(Material.GRASS_BLOCK,ChatColor.GOLD + "Create Island", description, 3, 4);
                 description.clear();
                 items.add(item);
             }
             if (player.hasPermission("skylyfe.is.delete"))
             {
-                Item item = new Item(Material.TNT,ChatColor.GOLD + "Delete island", description, 3, 6);
+                Item item = new Item(Material.TNT,ChatColor.GOLD + "Delete Island", description, 3, 6);
                 description.clear();
                 items.add(item);
             }
@@ -39,7 +46,7 @@ public class GUIManager {
             }
             if (player.hasPermission("skylyfe.is.sethome"))
             {
-                Item item = new Item(Material.BLUE_BED,ChatColor.GOLD + "Set home", description, 4, 5);
+                Item item = new Item(Material.BLUE_BED,ChatColor.GOLD + "Set Home", description, 4, 5);
                 description.clear();
                 items.add(item);
             }
@@ -52,7 +59,7 @@ public class GUIManager {
             if (player.hasPermission("skylyfe.is.top"))
             {
                 description = islandManager.IslandTop(player);
-                Item item = new Item(Material.DIAMOND,ChatColor.GOLD + "Island top", description, 3, 7);
+                Item item = new Item(Material.DIAMOND,ChatColor.GOLD + "Island Top", description, 3, 7);
                 description.clear();
                 items.add(item);
             }
@@ -63,6 +70,45 @@ public class GUIManager {
                 Item item = new Item(Material.DIAMOND,ChatColor.GOLD + "Island biome", description, 3, 2);
                 description.clear();
                 items.add(item);
+            }
+            if (player.hasPermission("skylyfe.is.rank") && player.hasPermission("skylyfe.is.rankup"))
+            {
+                if (enabledDifferentSizes)
+                {
+                    Island island = islandManager.GetIsland(player);
+                    if (island != null)
+                    {
+                        int rank = island.islandsize;
+                        if (island.owner.equals(player.getUniqueId()))
+                        {
+                            description.add(ChatColor.YELLOW + "Click to rank up, increasing the size of your island");
+                            description.add("");
+                            description.add("");
+                            description.add(ChatColor.YELLOW + "Current rank: " + ChatColor.BLUE + (rank + 1) + ChatColor.YELLOW + " with " + ChatColor.BLUE + islandsizes.get(rank) + ChatColor.YELLOW + " in size");
+                            if (rank != islandsizes.size())
+                            {
+                                description.add(ChatColor.YELLOW + "Next rank cost: " + ChatColor.BLUE + islandprices.get(rank) + ChatColor.YELLOW + " with " + ChatColor.BLUE + islandsizes.get(rank + 1) + ChatColor.YELLOW + " in size");
+                            }
+                            Item item = new Item(Material.GOLD_BLOCK,ChatColor.GOLD + "Rank", description, 3, 8);
+                            description.clear();
+                            items.add(item);
+                        }
+                        else
+                        {
+                            description.add(ChatColor.YELLOW + "Current rank: " + ChatColor.BLUE + (rank + 1) + ChatColor.YELLOW + " with " + ChatColor.BLUE + islandsizes.get(rank) + ChatColor.YELLOW + " in size");
+                            if (rank < islandsizes.size())
+                            {
+                                description.add(ChatColor.YELLOW + "Next rank cost: " + ChatColor.BLUE + islandprices.get(rank) + ChatColor.YELLOW + " with " + ChatColor.BLUE + islandsizes.get(rank + 1) + ChatColor.YELLOW + " in size");
+                            }
+                            description.add("");
+                            description.add("");
+                            description.add(ChatColor.YELLOW + "Only the owner of your island can rank up");
+                            Item item = new Item(Material.GOLD_BLOCK,ChatColor.BLUE + "Rank", description, 3, 8);
+                            description.clear();
+                            items.add(item);
+                        }
+                    }
+                }
             }
         }
         if (inventype.equals(Inventype.Team))
@@ -145,6 +191,44 @@ public class GUIManager {
             item = new Item(Material.BOOK,ChatColor.GOLD + "Go back", description, 6, 1);
             items.add(item);
         }
+        if (inventype.equals(Inventype.IslandTop))
+        {
+            i = main.getServer().createInventory(null, 27, ChatColor.BLUE + "Island Top");
+            int rank = 1;
+            for (Island island : islandManager.GetTopTen())
+            {
+                ItemStack item = GetSkull(island.owner);
+                switch (rank)
+                {
+                    case 1:
+                        i.setItem(4, item);
+                    case 2:
+                        i.setItem(12, item);
+                    case 3:
+                        i.setItem(14, item);
+                    case 4:
+                        i.setItem(19, item);
+                    case 5:
+                        i.setItem(20, item);
+                    case 6:
+                        i.setItem(21, item);
+                    case 7:
+                        i.setItem(22, item);
+                    case 8:
+                        i.setItem(23, item);
+                    case 9:
+                        i.setItem(24, item);
+                    case 10:
+                        i.setItem(25, item);
+
+                }
+                rank++;
+            }
+            player.openInventory(i);
+            return;
+        }
+
+
         for (Item item : items)
         {
             if (item == null)
@@ -153,5 +237,16 @@ public class GUIManager {
         }
         player.openInventory(i);
     }
+    private ItemStack GetSkull(UUID uuid)
+    {
+        for (PlayerHeadMeta ItemSkull : main.SkullList)
+        {
+            if (ItemSkull == null)
+                continue;
+            if (ItemSkull.player.equals(uuid))
+                return ItemSkull.GetSkull();
+        }
+        Bukkit.getLogger().log(Level.SEVERE, "An error occured");
+        return null;
+    }
 }
-enum Inventype {Biome, Island, Team}

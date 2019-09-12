@@ -9,5 +9,8 @@
         <module name="SkyLyfe" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="SkyLyfe" target="1.5" />
+    </bytecodeTargetLevel>
   </component>
 </project>

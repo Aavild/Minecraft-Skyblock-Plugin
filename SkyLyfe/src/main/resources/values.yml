@@ -1,0 +1,19 @@
+
+
+
+
+###          SkyLyfe Values Config          ###
+
+
+# this config is for assigning values for each block
+# /is value will return that value and it'll be used for calculating is level
+# is level caluclation method: (root of total value) / 5
+# ex is value = 225 then level = 3
+
+
+# here is a list of all material names https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/Material.html
+# Upper/Lowercase doesn't matter and please refrain from using LEGACY Materials
+Blocks:
+  - Diamond_block - 100
+  - Dirt - 1
+  - Acacia_log - 3
