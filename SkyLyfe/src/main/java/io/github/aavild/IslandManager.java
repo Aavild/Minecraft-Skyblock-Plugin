@@ -36,7 +36,7 @@ public class IslandManager {
     //Creation / deletion
     void CreateIsland(Player sender)
     {
-        if (enabledDifferentSizes)
+        /*if (enabledDifferentSizes)
         {
             if (islandprices.get(0) > 0 && main.economy != null)
             {
@@ -47,7 +47,7 @@ public class IslandManager {
                 }
                 main.economy.withdrawPlayer(sender, islandprices.get(0));
             }
-        }
+        }*/
         int islandNumber = islands.size();
         for (Island island : islands)
         {
@@ -56,11 +56,11 @@ public class IslandManager {
                 islandNumber = islands.indexOf(null);
                 continue;
             }
-            if (island.members.contains(sender.getUniqueId()))
+            /*if (island.members.contains(sender.getUniqueId()))
             {
                 sender.sendMessage("You already have an island");
                 return;
-            }
+            }*/
         }
         Location loc = islandPositionManager.location(islandNumber);
         Location home = schematic.CreateIsland(skyworld, loc, main);

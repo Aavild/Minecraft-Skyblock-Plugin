@@ -1,11 +1,10 @@
 package io.github.aavild;
 
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
+import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,10 +16,11 @@ public class GUIManager {
     IslandManager islandManager;
     List<Integer> islandsizes;
     List<Integer> islandprices;
+    World skyworld;
     boolean enabledDifferentSizes = false;
     public void NewInventory(Player player, Inventype inventype)
     {
-        Inventory i = main.getServer().createInventory(null, 54, ChatColor.GREEN + inventype.name());
+        Inventory inv = main.getServer().createInventory(null, 54, ChatColor.GREEN + inventype.name());
         List<String> description = new ArrayList<String>();
         List<Item> items = new ArrayList<Item>();
         if (inventype.equals(Inventype.Island))
@@ -193,38 +193,66 @@ public class GUIManager {
         }
         if (inventype.equals(Inventype.IslandTop))
         {
-            i = main.getServer().createInventory(null, 27, ChatColor.BLUE + "Island Top");
+            inv = main.getServer().createInventory(null, 27, ChatColor.BLUE + "Island Top");
             int rank = 1;
             for (Island island : islandManager.GetTopTen())
             {
                 ItemStack item = GetSkull(island.owner);
+                ItemMeta itemMeta = item.getItemMeta();
+
+                List<String> lore = new ArrayList<String>();
+                lore.add(ChatColor.BLUE + "Island Value: " + ChatColor.YELLOW + island.value);
+                lore.add(ChatColor.BLUE + "Island Level: " + ChatColor.YELLOW + (((int)Math.sqrt(island.value)) / 5));
+
+
+                StringBuilder members = new StringBuilder(ChatColor.BLUE + "Members: " + ChatColor.GREEN);
+                for (int i = 0; i < island.members.size(); i++)
+                {
+                    String member = main.getServer().getOfflinePlayer(island.members.get(i)).getName();
+                    members.append(member).append(", ");
+                }
+                String owner = main.getServer().getOfflinePlayer(island.owner).getName();
+                members.replace(members.indexOf(owner), members.indexOf(owner) + owner.length(), ChatColor.RED + owner);
+                members.deleteCharAt(members.length() - 1);
+                lore.add(members.toString());
+
+
+                Location loc = island.getIslandLocation(skyworld);
+                lore.add(ChatColor.BLUE +"Located at: " + "X: " + ChatColor.YELLOW +
+                        loc.getBlockX() + ChatColor.BLUE + "Z: " + ChatColor.YELLOW + loc.getBlockZ());
+
+
+                itemMeta.setLore(lore);
+                itemMeta.setDisplayName(island.IslandName);
+                item.setItemMeta(itemMeta);
+
                 switch (rank)
                 {
                     case 1:
-                        i.setItem(4, item);
+                        inv.setItem(4, item);
                     case 2:
-                        i.setItem(12, item);
+                        inv.setItem(12, item);
                     case 3:
-                        i.setItem(14, item);
+                        inv.setItem(14, item);
                     case 4:
-                        i.setItem(19, item);
+                        inv.setItem(19, item);
                     case 5:
-                        i.setItem(20, item);
+                        inv.setItem(20, item);
                     case 6:
-                        i.setItem(21, item);
+                        inv.setItem(21, item);
                     case 7:
-                        i.setItem(22, item);
+                        inv.setItem(22, item);
                     case 8:
-                        i.setItem(23, item);
+                        inv.setItem(23, item);
                     case 9:
-                        i.setItem(24, item);
+                        inv.setItem(24, item);
                     case 10:
-                        i.setItem(25, item);
+                        inv.setItem(25, item);
 
                 }
                 rank++;
             }
-            player.openInventory(i);
+            player.openInventory(inv);
             return;
         }
 
@@ -233,9 +261,9 @@ public class GUIManager {
         {
             if (item == null)
                 continue;
-            i.setItem(item.placement, item.item);
+            inv.setItem(item.placement, item.item);
         }
-        player.openInventory(i);
+        player.openInventory(inv);
     }
     private ItemStack GetSkull(UUID uuid)
     {

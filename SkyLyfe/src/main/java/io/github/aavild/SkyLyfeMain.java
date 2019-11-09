@@ -299,6 +299,7 @@ public class SkyLyfeMain extends JavaPlugin {
         }
         List<Material> materials = new ArrayList<Material>();
         List<Integer> values = new ArrayList<Integer>();
+        List<Integer> moneyValues = new ArrayList<Integer>();
         List<String> blocks = valuesConfig.getStringList("Blocks");
         //Bukkit.getServer().broadcastMessage(blocks.size() + "");
 
@@ -308,6 +309,7 @@ public class SkyLyfeMain extends JavaPlugin {
             //Bukkit.getServer().broadcastMessage(strings[0].trim());
             materials.add(Material.getMaterial(strings[0].trim().toUpperCase()));
             values.add(Integer.valueOf(strings[1].trim()));
+            moneyValues.add(Integer.valueOf(strings[2].trim()));
         }
         islandManager.values = values;
         islandManager.materials = materials;

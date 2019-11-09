@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Bærbar">
+    <output-path>$PROJECT_DIR$/../../1.14.4/plugins</output-path>
+    <root id="archive" name="SkyLyfe.jar">
+      <element id="module-output" name="SkyLyfe" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../Dependencies/Quests-3.7.8.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

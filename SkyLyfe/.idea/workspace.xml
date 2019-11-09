@@ -2,94 +2,21 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="SkyLyfe:jar" />
+      <artifact name="Bærbar" />
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6c4fdaeb-522c-4040-97d5-8acbc514a84d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/SkyLyfe_jar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/Aavild.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_MilkBowl_VaultAPI_1_7.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_code_gson_gson_2_8_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_guava_guava_21_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_googlecode_json_simple_json_simple_1_1_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_lang_commons_lang_2_6.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__junit_junit_4_10.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__net_md_5_bungeecord_chat_1_13_SNAPSHOT.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_bukkit_bukkit_1_13_1_R0_1_SNAPSHOT.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hamcrest_hamcrest_core_1_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_spigotmc_spigot_api_1_13_2_R0_1_SNAPSHOT.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_yaml_snakeyaml_1_23.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Quests_3_7_8.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/aavild/Enums.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/aavild/HotbarMessager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/aavild/IslandComperator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/aavild/IslandCoop.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/aavild/PlayerHeadMeta.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/aavild/PlayerJoinEventHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/aavild/get lines.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/values.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/SkyLyfe.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/artifacts/SkyLyfe_jar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/compiler.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/dictionaries/Aavild.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__com_google_code_gson_gson_2_8_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__com_google_guava_guava_21_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__com_googlecode_json_simple_json_simple_1_1_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__commons_lang_commons_lang_2_6.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__junit_junit_4_10.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__net_md_5_bungeecord_chat_1_13_SNAPSHOT.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_hamcrest_hamcrest_core_1_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_spigotmc_spigot_api_1_13_2_R0_1_SNAPSHOT.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_yaml_snakeyaml_1_23.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/uiDesigner.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/SkyLyfe_jar2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/Bærbar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_spigotmc_spigot_api_1_13_2_R0_1_SNAPSHOT.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_spigotmc_spigot_api_1_13_2_R0_1_SNAPSHOT.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SkyLyfe.iml" beforeDir="false" afterPath="$PROJECT_DIR$/SkyLyfe.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/aavild/Commands.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/aavild/Commands.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/aavild/CustomChunkGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/aavild/CustomChunkGenerator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/aavild/GUIEventHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/aavild/GUIEventHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/io/github/aavild/GUIManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/aavild/GUIManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/aavild/Island.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/aavild/Island.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/aavild/IslandCoopInvite.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/aavild/IslandInvite.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/io/github/aavild/IslandManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/aavild/IslandManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/aavild/IslandPositionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/aavild/IslandPositionManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/aavild/IslandProtection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/aavild/IslandProtection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/aavild/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/aavild/Item.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/aavild/Schematic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/aavild/Schematic.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/io/github/aavild/SkyLyfeMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/aavild/SkyLyfeMain.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/aavild/WandHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/aavild/WandHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/config.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/default.schematic" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/default.schematic" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/plugin.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/META-INF/SkyLyfe.kotlin_module" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/META-INF/SkyLyfe.kotlin_module" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/config.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/default.schematic" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/default.schematic" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/aavild/get lines.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/META-INF/SkyLyfe.kotlin_module" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/io/github/aavild/Commands.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/io/github/aavild/Commands.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/io/github/aavild/CustomChunkGenerator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/io/github/aavild/CustomChunkGenerator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/io/github/aavild/GUIEventHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/io/github/aavild/GUIEventHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/io/github/aavild/GUIManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/io/github/aavild/GUIManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/io/github/aavild/Inventype.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/io/github/aavild/Inventype.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/io/github/aavild/Island.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/io/github/aavild/Island.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/io/github/aavild/IslandCoopInvite.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/io/github/aavild/IslandManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/io/github/aavild/IslandManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/io/github/aavild/IslandPositionManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/io/github/aavild/IslandPositionManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/io/github/aavild/IslandProtection.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/io/github/aavild/IslandProtection.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/io/github/aavild/Item.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/io/github/aavild/Item.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/io/github/aavild/Schematic.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/io/github/aavild/Schematic.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/io/github/aavild/SkyLyfeMain.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/io/github/aavild/SkyLyfeMain.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/io/github/aavild/WandHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/io/github/aavild/WandHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/plugin.yml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -128,14 +55,14 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../Dependencies/Vault.jar!/" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../1.14.4/plugins" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.23908046" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
@@ -176,6 +103,8 @@
       <workItem from="1566641165827" duration="42511000" />
       <workItem from="1566737485620" duration="43000" />
       <workItem from="1568303842976" duration="4049000" />
+      <workItem from="1568377004698" duration="5573000" />
+      <workItem from="1571569388143" duration="3328000" />
     </task>
     <servers />
   </component>
