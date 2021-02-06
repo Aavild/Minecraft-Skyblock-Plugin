@@ -14,6 +14,6 @@
 # here is a list of all material names https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/Material.html
 # Upper/Lowercase doesn't matter and please refrain from using LEGACY Materials
 Blocks:
-  - Diamond_block - 100
-  - Dirt - 1
-  - Acacia_log - 3
+  - Diamond_block - 100 - 100
+  - Dirt - 1 - 1
+  - Acacia_log - 3 - 3

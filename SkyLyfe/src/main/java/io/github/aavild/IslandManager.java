@@ -1,15 +1,20 @@
 package io.github.aavild;
 
 import me.blackvein.quests.Quest;
-import net.milkbowl.vault.chat.Chat;
+import net.md_5.bungee.api.chat.ClickEvent;
+import net.md_5.bungee.api.chat.ComponentBuilder;
+import net.md_5.bungee.api.chat.HoverEvent;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.*;
 import org.bukkit.block.*;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
+import java.util.logging.Level;
 
 public class IslandManager {
     World skyworld;
@@ -18,12 +23,15 @@ public class IslandManager {
     List<IslandInvite> invites = new ArrayList<IslandInvite>();
     List<IslandCoop> coops = new ArrayList<IslandCoop>();
     List<Integer> sizes;
+    List<Player> deleters = new ArrayList<Player>();
     private IslandComperator islandComperator = new IslandComperator();
     IslandProtection islandProtection;
+    ChatEventHandler chatEventHandler;
 
     //Materials and their assigned values for calculation of island value
     List<Material> materials;
     List<Integer> values;
+    List<Integer> moneyValues;
 
     IslandPositionManager islandPositionManager;
     Schematic schematic;
@@ -34,58 +42,58 @@ public class IslandManager {
     List<Integer> islandprices;
 
     //Creation / deletion
-    void CreateIsland(Player sender)
+    void CreateIsland(Player player)
     {
-        /*if (enabledDifferentSizes)
-        {
-            if (islandprices.get(0) > 0 && main.economy != null)
-            {
-                if(!(main.economy.getBalance(sender) > islandprices.get(0)))
-                {
-                    sender.sendMessage(ChatColor.RED + "You don't have enough to buy an island\n" + ChatColor.YELLOW + "It costs " + islandprices.get(0) + " to buy an island");
-                    return;
-                }
-                main.economy.withdrawPlayer(sender, islandprices.get(0));
-            }
-        }*/
-        int islandNumber = islands.size();
         for (Island island : islands)
         {
             if (island == null)
-            {
-                islandNumber = islands.indexOf(null);
                 continue;
-            }
-            /*if (island.members.contains(sender.getUniqueId()))
+            if (island.members.contains(player.getUniqueId()))
             {
-                sender.sendMessage("You already have an island");
+                player.sendMessage("You already have an island");
                 return;
-            }*/
+            }
+        }
+        int islandNumber = islands.size();
+        List<Integer> ids = new ArrayList<Integer>();
+        for(Island island : islands)
+        {
+            if (island == null)
+                continue;
+            ids.add(island.id);
+        }
+        Collections.sort(ids);
+        for (int i = 0; i < ids.size(); i++)
+        {
+            if (i != ids.get(i))
+            {
+                islandNumber = i;
+                break;
+            }
         }
         Location loc = islandPositionManager.location(islandNumber);
-        Location home = schematic.CreateIsland(skyworld, loc, main);
-        Island island = new Island(sender, home, loc);
-        if (islands.contains(null))
-            islands.set(islands.indexOf(null), island);
-        else
-            islands.add(island);
+        Island island = new Island(player, loc, islandNumber);
+        //player.sendMessage("Island loc: " + loc);
+        islands.add(island);
 
-        main.SaveIslands();
-        sender.sendMessage(ChatColor.GREEN + "Created island");
-        TeleportPlayerHome(sender);
+        Location home = schematic.CreateIsland(skyworld, loc, main);
+        island.setHomeLocation(home);
+        //main.SaveIslands();
+        player.sendMessage(ChatColor.GREEN + "Created island");
+        TeleportPlayerHome(player);
         if (main.quests != null) //If it could find the quests plugin
         {
             Quest quest = main.quests.getQuest("CreateIslandQuest"); //Get the quest instance
-            quest.completeQuest(main.quests.getQuester(sender.getUniqueId())); //Complete the quest
+            quest.completeQuest(main.quests.getQuester(player.getUniqueId())); //Complete the quest
         }
     }
     void DeleteIsland(Player sender)
     {
         Island remove = GetIsland(sender);
-        if (!IsOwner(remove, sender))
+        if (!deleters.contains(sender))
             return;
-
-        islands.set(islands.indexOf(remove), null);
+        deleters.remove(sender);
+        islands.remove(remove);
         Location loc = remove.getIslandLocation(skyworld);
         for (int i = 0; i < IslandSize + IslandSize % 2; i++)
         {
@@ -103,8 +111,44 @@ public class IslandManager {
                 }
             }
         }
-        sender.getInventory().clear();
+        //sender.getInventory().clear();
         sender.teleport(standardWorld.getSpawnLocation());
+        main.SaveIslands();
+        sender.sendMessage(ChatColor.GOLD + "Succesfully deleted your island");
+    }
+    void ForceRemoveIsland(Player sender, OfflinePlayer target)
+    {
+        Island remove = null;
+        for(Island island : islands)
+        {
+            if (island == null)
+                continue;
+            if (island.owner == target.getUniqueId())
+                remove = island;
+        }
+        if (remove == null)
+        {
+            sender.sendMessage(ChatColor.RED + "Couldn't find the player");
+            return;
+        }
+        islands.remove(remove);
+        Location loc = remove.getIslandLocation(skyworld);
+        for (int i = 0; i < IslandSize + IslandSize % 2; i++)
+        {
+            for (int i2 = 0; i2 < 256; i2++)
+            {
+                for (int i3 = 0; i3 < IslandSize + IslandSize % 2; i3++)
+                {
+                    Block block = new Location(skyworld, i - IslandSize / 2 - IslandSize % 2 + loc.getBlockX(), i2, i3 - IslandSize / 2 - IslandSize % 2 + loc.getBlockZ()).getBlock();
+                    if (block.getType().equals(Material.CHEST))
+                    {
+                        BlockState bs = block.getState();
+                        ((Chest) bs).getInventory().clear();
+                    }
+                    block.setType(Material.AIR);
+                }
+            }
+        }
         main.SaveIslands();
     }
     void Leave(Player sender)
@@ -123,11 +167,12 @@ public class IslandManager {
         {
             island.members.remove(sender.getUniqueId());
             sender.getInventory().clear();
-            sender.setHealth(0);
-            sender.sendMessage(ChatColor.RED + "You have left your island");
+            sender.sendMessage(ChatColor.YELLOW + "You have left " + ChatColor.RED + main.getServer().getOfflinePlayer(island.owner).getName() + ChatColor.YELLOW + "'s island");
+            if (!sender.performCommand("spawn"))
+                sender.setHealth(0);
             Player owner = Bukkit.getServer().getPlayer(island.owner);
             if (owner != null)
-                owner.sendMessage(ChatColor.BLUE + sender.getName() + ChatColor.YELLOW + " left your island");
+                owner.sendMessage(ChatColor.RED + sender.getName() + ChatColor.YELLOW + " left your island");
         }
     }
 
@@ -152,7 +197,7 @@ public class IslandManager {
             {
                 island.setHomeLocation(sender.getLocation());
                 main.SaveIslands();
-                sender.sendMessage(ChatColor.GREEN + "Sat home");
+                sender.sendMessage(ChatColor.GREEN + "Set home");
             }
             else
                 sender.sendMessage(ChatColor.RED + "You can only set home within your own island");
@@ -161,6 +206,16 @@ public class IslandManager {
             sender.sendMessage(ChatColor.RED + "Only the owner can set home");
 
     }
+    void FixHome(Player sender)
+    {
+        Island island = GetIsland(sender);
+        if (island == null)
+        {
+            sender.sendMessage(ChatColor.YELLOW + "You do not own an island");
+            return;
+        }
+        island.setHomeLocation(schematic.RecoverHome(island.getIslandLocation(skyworld), islandProtection, island.islandsize));
+    }
 
     //Utils
     void SetIslandName (Player sender, String name)
@@ -168,11 +223,16 @@ public class IslandManager {
         Island island = GetIsland(sender);
         if (!IsOwner(island, sender))
             return;
-        island.IslandName = name;
         if (name == null)
-            sender.sendMessage(ChatColor.GOLD + "Resat your islands name");
-        else
-            sender.sendMessage(ChatColor.GOLD + "Set the island name to " + name);
+        {
+            sender.sendMessage(ChatColor.YELLOW + "Your islands name have been reset");
+            island.IslandName = name;
+            main.SaveIslands();
+            return;
+        }
+        name = ChatColor.translateAlternateColorCodes('&', name);
+        island.IslandName = name;
+        sender.sendMessage(ChatColor.YELLOW + "Sat the island name to: " + ChatColor.WHITE + name);
         main.SaveIslands();
     }
     void ListMembers(Player sender)
@@ -183,13 +243,42 @@ public class IslandManager {
             sender.sendMessage(ChatColor.RED + "You're not a member of an island");
             return;
         }
-        StringBuilder s = new StringBuilder();
+
+        sender.sendMessage(ChatColor.YELLOW + "Members from your island:");
+        StringBuilder stringBuilder = new StringBuilder();
+        int i = 1;
+        int u = 1;
+        for (UUID uuid : island.members)
+        {
+            if (uuid == null)
+                continue;
+            String s = ChatColor.RED + main.getServer().getOfflinePlayer(uuid).getName() + ChatColor.YELLOW + ", ";
+            stringBuilder.append(s);
+            if ((i / 3) == u)
+            {
+                if (i == island.members.size())
+                {
+                    stringBuilder.deleteCharAt(stringBuilder.lastIndexOf(","));
+                    sender.sendMessage(stringBuilder.toString());
+                    return;
+                }
+                sender.sendMessage(stringBuilder.toString());
+                stringBuilder = new StringBuilder();
+                u++;
+            }
+            i++;
+        }
+        stringBuilder.deleteCharAt(stringBuilder.lastIndexOf(","));
+        sender.sendMessage(stringBuilder.toString());
+
+
+        /*StringBuilder s = new StringBuilder();
         for (UUID uuid : island.members)
         {
             s.append(Bukkit.getOfflinePlayer(uuid).getName() + ChatColor.GREEN + ", ");
         }
         s.deleteCharAt(s.lastIndexOf(","));
-        sender.sendMessage(ChatColor.GREEN + "Players: "+ ChatColor.BLUE + s);
+        sender.sendMessage(ChatColor.GREEN + "Players: "+ ChatColor.BLUE + s);*/
     }
     void SetBiome(Player sender, String biomeString)
     {
@@ -201,7 +290,7 @@ public class IslandManager {
         try
         {
             biome = Biome.valueOf(biomeString.toUpperCase());
-            sender.sendMessage(ChatColor.GREEN + "Changed Biome to " + ChatColor.BLUE + biomeString + ChatColor.YELLOW + "\n Relog to see changes");
+            sender.sendMessage(ChatColor.YELLOW + "Changed Biome to " + ChatColor.GREEN + biomeString + ChatColor.YELLOW + "\nRelog to see changes");
         }
         catch (IllegalArgumentException e)
         {
@@ -229,10 +318,10 @@ public class IslandManager {
         if (island.members.contains(uuid))
         {
             island.owner = uuid;
-            sender.sendMessage(ChatColor.GREEN + "Made " + main.getServer().getOfflinePlayer(uuid).getName() + " owner");
+            sender.sendMessage(ChatColor.YELLOW + "Made " + ChatColor.RED + main.getServer().getOfflinePlayer(uuid).getName() + ChatColor.YELLOW + " island owner");
             Player newOwner = Bukkit.getServer().getPlayer(island.owner);
             if (newOwner != null)
-                newOwner.sendMessage(ChatColor.BLUE + sender.getName() + ChatColor.YELLOW + " have made you owner");
+                newOwner.sendMessage(ChatColor.RED + sender.getName() + ChatColor.YELLOW + " made you island owner");
         }
         else
         {
@@ -244,7 +333,41 @@ public class IslandManager {
         Island island = GetIsland(sender);
         if (!IsOwner(island, sender))
             return;
+        if (island.locked)
+        {
+            sender.sendMessage(ChatColor.YELLOW + "Your island is already locked");
+            return;
+        }
         island.locked = true;
+        for (Player player : main.getServer().getOnlinePlayers())
+        {
+            if (island.members.contains(player.getUniqueId()))
+                continue;
+            boolean cooped = false;
+            for (IslandCoop coop : coops)
+            {
+                if (coop.island.equals(island))
+                    if (coop.cooped.equals(player.getUniqueId()))
+                    {
+                        cooped = true;
+                        break;
+                    }
+            }
+            if (cooped)
+                continue;
+            if (islandProtection.WithinIsland(player.getLocation(), island.getIslandLocation(skyworld), island.islandsize))
+            {
+                if (player.hasPermission("skylyfe.admin.bypass.lock"))
+                {
+                    player.sendMessage(ChatColor.RED + sender.getName() + ChatColor.YELLOW + " tried to suspend you from his island with /is lock");
+                    sender.sendMessage(ChatColor.YELLOW + "You cannot suspend " + ChatColor.RED + player.getName() + ChatColor.YELLOW + " from your island");
+                    continue;
+                }
+                player.teleport(standardWorld.getSpawnLocation());
+                sender.sendMessage(ChatColor.YELLOW + "Suspended " + ChatColor.RED + player.getName() + ChatColor.YELLOW + " from your island");
+                player.sendMessage(ChatColor.GOLD + "You got suspended from " + sender.getName() + "s island");
+            }
+        }
         sender.sendMessage(ChatColor.GOLD + "Locked your island");
     }
     void UnlockIsland(Player sender)
@@ -252,8 +375,13 @@ public class IslandManager {
         Island island = GetIsland(sender);
         if (!IsOwner(island, sender))
             return;
+        if (!island.locked)
+        {
+            sender.sendMessage(ChatColor.YELLOW + "Your island is already unlocked");
+            return;
+        }
         island.locked = false;
-        sender.sendMessage(ChatColor.GOLD + "Unlocked your island");
+        sender.sendMessage(ChatColor.YELLOW + "Unlocked your island");
     }
     void RankUpIsland(Player sender)
     {
@@ -264,21 +392,30 @@ public class IslandManager {
         }
         Island island = GetIsland(sender);
         if (!IsOwner(island, sender))
+        {
+            sender.sendMessage(ChatColor.RED + "You're not the owner of your island");
             return;
-        int cost = islandprices.get(island.islandsize + 1);
+        }
+        int cost = islandprices.get(island.islandsize);
         if (cost > main.economy.getBalance(sender))
         {
             sender.sendMessage(ChatColor.YELLOW + "You don't have enough money to rank up your island");
             return;
         }
-        sender.sendMessage(ChatColor.BLUE + "Increased your island size");
         main.economy.withdrawPlayer(sender, cost);
         island.islandsize += 1;
+        sender.sendMessage(ChatColor.YELLOW + "Increased your island size from " + ChatColor.GREEN + sizes.get(island.islandsize - 1) + "x" + sizes.get(island.islandsize - 1) +
+                ChatColor.YELLOW + " to " + ChatColor.GREEN + sizes.get(island.islandsize) + "x" + sizes.get(island.islandsize));
+        if (island.islandsize + 1 != sizes.size())
+            sender.sendMessage(ChatColor.YELLOW + "Next rank cost: " + ChatColor.GREEN + islandprices.get(island.islandsize) +
+                    ChatColor.YELLOW + " with " + ChatColor.GREEN + sizes.get(island.islandsize + 1) + "x" + sizes.get(island.islandsize + 1) + ChatColor.YELLOW + " in size");
+        else
+            sender.sendMessage(ChatColor.YELLOW + "Your island is now maximum size");
     }
     void UpdateIslandsValue(Island island)
     {
         Location loc = island.getIslandLocation(skyworld);
-        int value = 0;
+        int[] value = new int[2];
         int size;
         if (enabledDifferentSizes)
         {
@@ -294,11 +431,15 @@ public class IslandManager {
                 {
                     Block block = new Location(skyworld, i - IslandSize / 2 + loc.getBlockX(), i2, i3 - IslandSize / 2 + loc.getBlockZ()).getBlock();
                     if (materials.contains(block.getType()))
-                        value += values.get(materials.indexOf(block.getType()));
+                    {
+                        value[0] += values.get(materials.indexOf(block.getType()));
+                        value[1] += moneyValues.get(materials.indexOf(block.getType()));
+                    }
                 }
             }
         }
-        island.value = value;
+        island.value = value[0];
+        island.moneyValue = value[1];
     }
 
 
@@ -312,11 +453,52 @@ public class IslandManager {
         Island island1 = GetIsland(invited);
         if (island1 != null)
         {
-            sender.sendMessage(ChatColor.RED + "That player is already a member of an island");
+            sender.sendMessage(ChatColor.RED + invited.getName() + ChatColor.YELLOW + " already have an island");
             return;
         }
-        sender.sendMessage(ChatColor.BLUE + invited.getName() + ChatColor.GREEN + " has been invited to join your island");
-        invited.sendMessage(ChatColor.GREEN + "You have been invited to join " + ChatColor.BLUE + sender.getName() + "'" + ChatColor.GREEN + " island");
+        sender.sendMessage(ChatColor.YELLOW + "Invited " + ChatColor.RED + invited.getName() + ChatColor.YELLOW + " to your island");
+        TextComponent text = new TextComponent("");
+        invited.sendMessage(ChatColor.YELLOW + "You have been invited to join " + ChatColor.RED + sender.getName() + ChatColor.YELLOW + "'s island");
+
+
+
+
+        TextComponent message = new TextComponent( "Type " );
+        message.setColor( net.md_5.bungee.api.ChatColor.YELLOW );
+
+        TextComponent command = new TextComponent( "/is accept" );
+        command.setColor( net.md_5.bungee.api.ChatColor.GREEN );
+        command.setUnderlined( true );
+        command.setClickEvent( new ClickEvent( ClickEvent.Action.RUN_COMMAND, "/is accept" ) );
+        ComponentBuilder hoverText = new ComponentBuilder( "Click to accept the invite" );
+        hoverText.color(net.md_5.bungee.api.ChatColor.GREEN);
+        command.setHoverEvent( new HoverEvent( HoverEvent.Action.SHOW_TEXT, hoverText.create() ) );
+        message.addExtra( command );
+
+        TextComponent message2 = new TextComponent( " to accept the invite or type " );
+        message2.setColor(net.md_5.bungee.api.ChatColor.YELLOW);
+        message.addExtra( message2);
+
+        TextComponent command2 = new TextComponent( "/is reject" );
+        command2.setColor( net.md_5.bungee.api.ChatColor.RED );
+        command2.setUnderlined( true );
+        command2.setClickEvent( new ClickEvent( ClickEvent.Action.RUN_COMMAND, "/is reject" ) );
+        ComponentBuilder hoverText2 = new ComponentBuilder( "Click to reject the invite" );
+        hoverText2.color(net.md_5.bungee.api.ChatColor.RED);
+        command2.setHoverEvent( new HoverEvent( HoverEvent.Action.SHOW_TEXT, hoverText2.create() ) );
+        message.addExtra( command2 );
+
+        TextComponent message3 = new TextComponent( " to accept the invite or type " );
+        message3.setColor(net.md_5.bungee.api.ChatColor.YELLOW);
+        message.addExtra( message3);
+
+        invited.spigot().sendMessage( message );
+
+
+
+
+
+
         for (IslandInvite invite : invites)
         {
             if (invite.player.equals(invited))
@@ -332,15 +514,15 @@ public class IslandManager {
         IslandInvite invite = GetInvite(sender);
         if (invite == null)
         {
-            sender.sendMessage(ChatColor.RED + "You don't have any incoming invites");
+            sender.sendMessage(ChatColor.YELLOW + "You don't have any incoming invites");
             return;
         }
         invite.island.members.add(sender.getUniqueId());
-        sender.sendMessage(ChatColor.GREEN + "Accepted the invite");
+        sender.sendMessage(ChatColor.YELLOW + "Joined " + ChatColor.RED + main.getServer().getOfflinePlayer(invite.island.owner).getName() + ChatColor.YELLOW +  "'s island");
         sender.teleport(invite.island.getHomeLocation(skyworld));
         Player owner = main.getServer().getPlayer(invite.island.owner);
         if (owner != null)
-            owner.sendMessage(ChatColor.BLUE + sender.getName() + ChatColor.YELLOW + " accepted your invite");
+            owner.sendMessage(ChatColor.RED + sender.getName() + ChatColor.YELLOW + " joined your island");
         invites.remove(invite);
     }
     void RejectInvite(Player sender)
@@ -348,16 +530,16 @@ public class IslandManager {
         IslandInvite invite = GetInvite(sender);
         if (invite == null)
         {
-            sender.sendMessage(ChatColor.RED + "You don't have any incoming invites");
+            sender.sendMessage(ChatColor.YELLOW + "You don't have any incoming invites");
             return;
         }
         invites.remove(invite);
-        sender.sendMessage(ChatColor.YELLOW + "Rejected the invite...");
+        sender.sendMessage(ChatColor.YELLOW + "You have rejected the invite to join " + ChatColor.RED + main.getServer().getOfflinePlayer(invite.island.owner).getName() + ChatColor.YELLOW + "'s island");
         Player owner = Bukkit.getServer().getPlayer(invite.island.owner);
         if (owner != null)
-            owner.sendMessage(ChatColor.BLUE + sender.getName() + ChatColor.YELLOW + " declined your invite");
+            owner.sendMessage(ChatColor.RED + sender.getName() + ChatColor.YELLOW + " rejected your invite to join your island");
     }
-    void Kick(Player sender, Player target)
+    void Kick(Player sender, String target)
     {
         Island island = GetIsland(sender);
         if (island == null)
@@ -367,23 +549,31 @@ public class IslandManager {
         }
         if (island.owner.equals(sender.getUniqueId()))
         {
-            if (island.members.contains(target.getUniqueId()))
+            OfflinePlayer player = null;
+            for (UUID uuid : island.members)
             {
-                if (sender.getUniqueId().equals(target.getUniqueId()))
+                OfflinePlayer offlinePlayer = main.getServer().getOfflinePlayer(uuid);
+                if (offlinePlayer.getName().equalsIgnoreCase(target))
                 {
-                    sender.sendMessage(ChatColor.RED + "Quit trying to kick yourself, moron");
-                    return;
+                    player = offlinePlayer;
+                    break;
                 }
-                sender.sendMessage(ChatColor.GREEN + "Removed " + target.getName() + " from your island");
-                island.members.remove(target.getUniqueId());
-                Player removed = Bukkit.getServer().getPlayer(island.owner);
-                if (removed != null)
-                    removed.sendMessage(ChatColor.BLUE + sender.getName() + ChatColor.YELLOW + " have kicked you from the island");
             }
-            else
+            if (player == null)
             {
-                sender.sendMessage(ChatColor.RED + "That player isn't a part of your island");
+                sender.sendMessage(ChatColor.RED + "Couldn't find the player");
+                return;
             }
+            if (sender.getUniqueId().equals(player.getUniqueId()))
+            {
+                sender.sendMessage(ChatColor.RED + "Quit trying to kick yourself");
+                return;
+            }
+            sender.sendMessage(ChatColor.YELLOW + "Kicked " + ChatColor.RED + player.getName() + ChatColor.YELLOW + " from your island");
+            island.members.remove(player.getUniqueId());
+            Player removed = Bukkit.getServer().getPlayer(player.getUniqueId());
+            if (removed != null)
+                removed.sendMessage(ChatColor.YELLOW + "You have been kicked from " + ChatColor.RED + sender.getName() + ChatColor.YELLOW + "'s island");
         }
         else
         {
@@ -395,17 +585,23 @@ public class IslandManager {
         Island island = GetIsland(sender);
         if (!IsOwner(island, sender))
             return;
+        if (island.members.contains(cooped.getUniqueId()))
+        {
+            sender.sendMessage(ChatColor.RED + cooped.getName() + ChatColor.YELLOW + " is a part of your island");
+            return;
+        }
+        UUID coopedID = cooped.getUniqueId();
         for (IslandCoop coop : coops)
         {
-            if (coop.cooped.equals(cooped) && coop.island.equals(island))
+            if (coop.cooped.equals(coopedID) && coop.island.equals(island))
             {
-                sender.sendMessage("That player is already cooped to your island");
+                sender.sendMessage(ChatColor.RED + cooped.getName() + ChatColor.YELLOW + " is already cooped to your island");
                 return;
             }
         }
-        coops.add(new IslandCoop(island, cooped));
-        sender.sendMessage(ChatColor.BLUE + cooped.getName() + ChatColor.GREEN + " has been cooped to your island");
-        cooped.sendMessage(ChatColor.GREEN + "You have been cooped to " + ChatColor.BLUE + sender.getName() + "'" + ChatColor.GREEN + " island");
+        coops.add(new IslandCoop(island, coopedID));
+        sender.sendMessage(ChatColor.RED + cooped.getName() + ChatColor.YELLOW + " has been cooped to your island");
+        cooped.sendMessage(ChatColor.YELLOW + "You have been cooped to " + ChatColor.RED + sender.getName() + ChatColor.YELLOW + "'s island");
     }
     void RemoveCoop(Player sender, Player cooped)
     {
@@ -415,10 +611,10 @@ public class IslandManager {
         IslandCoop islandCoop = null;
         for (IslandCoop coop : coops)
         {
-            if (coop.cooped.equals(cooped) && coop.island.equals(island))
+            if (coop.cooped.equals(cooped.getUniqueId()) && coop.island.equals(island))
             {
-                sender.sendMessage(ChatColor.BLUE + cooped.getName() + ChatColor.GREEN + " has been uncooped from your island");
-                cooped.sendMessage(ChatColor.GREEN + "You have been uncooped from " + ChatColor.BLUE + sender.getName() + "'s" + ChatColor.GREEN + " island");
+                sender.sendMessage( ChatColor.YELLOW + "You have uncooped " + ChatColor.RED + cooped.getName() + " from your island");
+                cooped.sendMessage(ChatColor.YELLOW + "You have been uncooped from " + ChatColor.RED + sender.getName() + ChatColor.YELLOW + "'s island");
                 islandCoop = coop;
             }
         }
@@ -427,6 +623,69 @@ public class IslandManager {
         else
             sender.sendMessage(ChatColor.RED + "That Player is not cooped to your island");
     }
+    void ListCoops(Player sender)
+    {
+        Island island = GetIsland(sender);
+        if (island == null)
+        {
+            sender.sendMessage(ChatColor.RED + "You're not a member of an island");
+            return;
+        }
+        sender.sendMessage(ChatColor.YELLOW + "Players cooped for your island:");
+        StringBuilder stringBuilder = new StringBuilder();
+        int i = 1;
+        int u = 1;
+        int a = 0;
+        for (IslandCoop islandCoop : coops)
+        {
+            a++;
+            if (islandCoop == null)
+                continue;
+            if (!islandCoop.island.equals(island))
+                continue;
+            String s = ChatColor.RED + main.getServer().getOfflinePlayer(islandCoop.cooped).getName() + ChatColor.YELLOW + ", ";
+            stringBuilder.append(s);
+            if ((i / 3) == u)
+            {
+                if (a == coops.size())
+                {
+                    stringBuilder.deleteCharAt(stringBuilder.lastIndexOf(","));
+                    sender.sendMessage(stringBuilder.toString());
+                    return;
+                }
+                sender.sendMessage(stringBuilder.toString());
+                stringBuilder = new StringBuilder();
+                u++;
+            }
+            i++;
+        }
+        stringBuilder.deleteCharAt(stringBuilder.lastIndexOf(","));
+        sender.sendMessage(stringBuilder.toString());
+    }
+    void RemoveAllCoops(Player player)
+    {
+        Island island = GetIsland(player);
+        if (island == null)
+            return;
+        if (island.owner != player.getUniqueId())
+            return;
+        List<IslandCoop> remove = new ArrayList<IslandCoop>();
+        for (IslandCoop coop : coops)
+        {
+            if (coop == null)
+                continue;
+            if (!coop.island.equals(island))
+                continue;
+            remove.add((coop));
+            Player cooped = main.getServer().getPlayer(coop.cooped);
+            if (cooped == null)
+                continue;
+            cooped.sendMessage(ChatColor.YELLOW + "You have been uncooped from " + ChatColor.RED + player.getName() + ChatColor.YELLOW + "'s island");
+        }
+        for (IslandCoop removeCoop : remove)
+            coops.remove(removeCoop);
+    }
+
     void Ban(Player sender, UUID uuid)
     {
         Island island = GetIsland(sender);
@@ -442,8 +701,12 @@ public class IslandManager {
                 sender.sendMessage(ChatColor.RED + "You can't ban yourself");
                 return;
             }
+            if (island.members.contains(uuid))
+            {
+                sender.sendMessage(ChatColor.YELLOW + "You can't ban " + ChatColor.RED + main.getServer().getOfflinePlayer(uuid).getName() + ChatColor.YELLOW + " from your island");
+            }
             island.Bans.add(uuid);
-            sender.sendMessage(ChatColor.GOLD + "Banned the player from your island");
+            sender.sendMessage(ChatColor.YELLOW + "Banned " + ChatColor.RED + main.getServer().getOfflinePlayer(uuid).getName() + ChatColor.YELLOW + " from your island");
         }
         else
             sender.sendMessage(ChatColor.RED + "You're not the owner of your island");
@@ -461,10 +724,10 @@ public class IslandManager {
             if (island.Bans.contains(uuid))
             {
                 island.Bans.remove(uuid);
-                sender.sendMessage(ChatColor.GREEN + "Unbanned the player from your island");
+                sender.sendMessage(ChatColor.YELLOW + "Unbanned " + ChatColor.RED + main.getServer().getOfflinePlayer(uuid).getName() + ChatColor.YELLOW +  " from your island");
             }
             else
-                sender.sendMessage("Couldn't find that player");
+                sender.sendMessage(ChatColor.RED + main.getServer().getOfflinePlayer(uuid).getName() + ChatColor.YELLOW + " is not banned from your island");
         }
         else
             sender.sendMessage(ChatColor.RED + "You're not the owner of your island");
@@ -481,8 +744,14 @@ public class IslandManager {
         {
             if (islandProtection.WithinIsland(target.getLocation(), island.getIslandLocation(skyworld), island.islandsize))
             {
+                if (target.hasPermission("skylyfe.is.suspend.ignore"))
+                {
+                    target.sendMessage(ChatColor.RED + sender.getName() + ChatColor.YELLOW + " tried to suspend you from his island");
+                    sender.sendMessage(ChatColor.YELLOW + "You cannot suspend " + ChatColor.RED + target.getName() + ChatColor.YELLOW + " from your island");
+                    return;
+                }
                 target.teleport(standardWorld.getSpawnLocation());
-                sender.sendMessage(ChatColor.GREEN + "Suspended the player from your island");
+                sender.sendMessage(ChatColor.YELLOW + "Suspended " + ChatColor.RED + target.getName() + ChatColor.YELLOW + " from your island");
                 target.sendMessage(ChatColor.GOLD + "You got suspended from " + sender.getName() + "s island");
             }
             else
@@ -492,6 +761,110 @@ public class IslandManager {
         }
         else
             sender.sendMessage(ChatColor.RED + "You're not the owner of your island");
+    }
+    void ApplyForDelete(Player sender)
+    {
+        Island island = GetIsland(sender);
+        if (island == null)
+        {
+            sender.sendMessage(ChatColor.RED + "You're not a member of an island");
+            return;
+        }
+
+        if (island.owner.equals(sender.getUniqueId()))
+        {
+            deleters.add(sender);
+
+
+            TextComponent message = new TextComponent( "Please type " );
+            message.setColor( net.md_5.bungee.api.ChatColor.RED );
+
+            TextComponent command = new TextComponent( "/is confirm" );
+            command.setColor( net.md_5.bungee.api.ChatColor.DARK_RED );
+            command.setUnderlined( true );
+            command.setClickEvent( new ClickEvent( ClickEvent.Action.RUN_COMMAND, "/is confirm" ) );
+            ComponentBuilder hoverText = new ComponentBuilder( "Click me to confirm!" );
+            hoverText.color(net.md_5.bungee.api.ChatColor.BLUE);
+            command.setHoverEvent( new HoverEvent( HoverEvent.Action.SHOW_TEXT, hoverText.create() ) );
+            message.addExtra( command );
+
+            TextComponent message2 = new TextComponent( " to confirm deletion of your island" );
+            message2.setColor(net.md_5.bungee.api.ChatColor.RED);
+            message.addExtra( message2);
+
+            sender.spigot().sendMessage( message );
+
+
+
+        }
+        else
+            sender.sendMessage(ChatColor.RED + "You're not the owner of your island");
+    }
+    void GetBanList(Player sender)
+    {
+        Island island = GetIsland(sender);
+        if (island == null)
+        {
+            sender.sendMessage(ChatColor.RED + "You're not a member of an island");
+            return;
+        }
+        sender.sendMessage(ChatColor.YELLOW + "Players banned from your island:");
+        StringBuilder stringBuilder = new StringBuilder();
+        int i = 1;
+        int u = 1;
+        for (UUID uuid : island.Bans)
+        {
+            if (uuid == null)
+                continue;
+            String s = ChatColor.RED + main.getServer().getOfflinePlayer(uuid).getName() + ChatColor.YELLOW + ", ";
+            stringBuilder.append(s);
+            if ((i / 3) == u)
+            {
+                if (i == island.Bans.size())
+                {
+                    stringBuilder.deleteCharAt(stringBuilder.lastIndexOf(","));
+                    sender.sendMessage(stringBuilder.toString());
+                    return;
+                }
+                sender.sendMessage(stringBuilder.toString());
+                stringBuilder = new StringBuilder();
+                u++;
+            }
+            i++;
+        }
+        stringBuilder.deleteCharAt(stringBuilder.lastIndexOf(","));
+        sender.sendMessage(stringBuilder.toString());
+    }
+    void TeamChat(Player sender)
+    {
+        if (GetIsland(sender) == null)
+        {
+            sender.sendMessage(ChatColor.RED + "You're not a member of an island");
+            return;
+        }
+        if (chatEventHandler.players.contains(sender))
+        {
+            chatEventHandler.players.remove(chatEventHandler.players.indexOf(sender));
+            sender.sendMessage(ChatColor.YELLOW + "Disabled teamchat");
+        }
+        else
+        {
+            chatEventHandler.players.add(sender);
+            sender.sendMessage(ChatColor.YELLOW + "Enabled teamchat");
+        }
+    }
+    void SpyTeamChat(Player sender)
+    {
+        if (chatEventHandler.adminAbusers.contains(sender))
+        {
+            chatEventHandler.adminAbusers.remove(chatEventHandler.adminAbusers.indexOf(sender));
+            sender.sendMessage(ChatColor.YELLOW + "Disabled spying teamchat");
+        }
+        else
+        {
+            chatEventHandler.adminAbusers.add(sender);
+            sender.sendMessage(ChatColor.YELLOW + "Enabled spying teamchat");
+        }
     }
 
     //Non-voids
@@ -534,24 +907,41 @@ public class IslandManager {
         }
         return null;
     }
-    float GetIslandLevel(Player sender)
+    int GetIslandLevel(Player sender)
     {
         Island island = GetIsland(sender);
         if (island == null)
         {
-            sender.sendMessage(ChatColor.RED + "You're not a member of an island");
             return -1;
         }
         UpdateIslandsValue(island);
         return ((int)Math.sqrt(island.value)) / 5;
     }
-    int GetValue(Player sender)
+    int GetIslandValue(Player sender)
     {
+        Island island = GetIsland(sender);
+        if (island == null)
+        {
+            return -1;
+        }
+        UpdateIslandsValue(island);
+        return island.value;
+    }
+    int[] GetValue(Player sender)
+    {
+        int[] itemValues = new int[2];
         Material material = sender.getInventory().getItemInMainHand().getType();
         if (materials.contains(material))
-            return values.get(materials.indexOf(material));
+        {
+            itemValues[0] = values.get(materials.indexOf(material));
+            itemValues[1] = moneyValues.get(materials.indexOf(material));
+        }
         else
-            return -1;
+        {
+            itemValues[0] = -1;
+            itemValues[1] = -1;
+        }
+        return itemValues;
     }
     Location GetPlayerIslandLocation(Player sender)
     {
@@ -564,6 +954,8 @@ public class IslandManager {
     {
         for (Island island : islands)
         {
+            if (island == null)
+                continue;
             if (loc.equals(island.getIslandLocation(skyworld)))
                 return island;
         }
@@ -575,9 +967,14 @@ public class IslandManager {
         List<String> s = new ArrayList<String>();
         for (Island island : sortedislands)
         {
+            if (s.size() == 10)
+                break;
             if (island == null)
                 continue;
-            s.add(ChatColor.GREEN +"" + Bukkit.getServer().getOfflinePlayer(island.owner).getName() + ": " + ChatColor.LIGHT_PURPLE + ((int)Math.sqrt(island.value)) / 5);
+            if (island.IslandName == null)
+                s.add(ChatColor.GREEN +"" + Bukkit.getServer().getOfflinePlayer(island.owner).getName() + ": " + ChatColor.LIGHT_PURPLE + ((int)Math.sqrt(island.value)) / 5);
+            else
+                s.add(ChatColor.GREEN +"" + island.IslandName + ChatColor.YELLOW + " - Lvl: " + ChatColor.GREEN + ((int)Math.sqrt(island.value)) / 5 + ChatColor.YELLOW + ", Value: " + ChatColor.GREEN + island.value);
         }
         if (s.size() == 1 && s.get(0) == null)
         {
@@ -589,7 +986,15 @@ public class IslandManager {
     List<Island> GetTopTen()
     {
         List<Island> sortedislands = islands;
+        List<Island> remove = new ArrayList<Island>();
+        for (Island island : sortedislands)
+        {
+            if (island == null)
+                remove.add(island);
+        }
+        sortedislands.removeAll(remove);
         Collections.sort(sortedislands, islandComperator);
+        Collections.reverse(sortedislands);
         if (sortedislands.size() > 10)
             sortedislands = sortedislands.subList(0, 9);
         return sortedislands;

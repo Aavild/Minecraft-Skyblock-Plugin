@@ -28,6 +28,8 @@ public class Island implements Serializable {
     String IslandName = null;
     //Island value for comparison with other islands, level is calculated from this too
     int value = 0;
+    int moneyValue = 0;
+    int id;
     //locked is whether other players than the owner and members can enter the island
     boolean locked = false;
     //Settings is minor changes for what people can do on the island
@@ -35,11 +37,13 @@ public class Island implements Serializable {
     //islandsize from 0 - infinity determining how big an area a players island is
     int islandsize = 0;
 
-    Island(Player player, Location islandHome, Location location)
+    Island(Player player, Location location, int id)
     {
         owner = player.getUniqueId();
         members.add(player.getUniqueId());
-        setHomeLocation(islandHome);
+        settings[2] = true;
+        settings[3] = true;
+        this.id = id;
 
         islandLocationCoords[0] = location.getBlockX();
         islandLocationCoords[1] = location.getBlockY();

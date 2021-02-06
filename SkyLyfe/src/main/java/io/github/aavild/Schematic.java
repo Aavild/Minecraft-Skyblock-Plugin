@@ -1,11 +1,13 @@
 package io.github.aavild;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.Container;
 import org.bukkit.configuration.serialization.ConfigurationSerialization;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -74,6 +76,38 @@ public class Schematic implements Serializable {
                 home[1] + centerLocation.getBlockY() - size[1] / 2,
                 home[2] + centerLocation.getBlockZ() - size[2] / 2 + 0.5,
                 home[3], home[4]);
+    }
+    Location RecoverHome(Location centerLocation, IslandProtection islandProtection, int islandsSize)
+    {
+        int radius = 20;
+        Location centerLoc = new Location(centerLocation.getWorld(), home[0] + centerLocation.getX(), home[1] + centerLocation.getY(), home[2] + centerLocation.getZ(), home[3], home[4]);
+        Location newHomeLoc = null;
+        for(int y = -radius; y <= radius; y++)
+        {
+            for(int x = -radius; x <= radius; x++)
+            {
+                for(int z = -radius; z <= radius; z++)
+                {
+                    Location currentLoc = centerLoc;
+                    currentLoc.setX(currentLoc.getX() + x);
+                    currentLoc.setY(currentLoc.getY() + y);
+                    currentLoc.setZ(currentLoc.getZ() + z);
+                    Location oneLower = currentLoc;
+                    oneLower.setY(currentLoc.getY() - 1);
+                    Location oneHigher = currentLoc;
+                    oneHigher.setY(currentLoc.getY() + 1);
+                    if (!islandProtection.WithinIsland(currentLoc, centerLoc, islandsSize) || !currentLoc.getBlock().getType().equals(Material.AIR) ||
+                            oneLower.getBlock().getType().equals(Material.AIR) || oneLower.getBlock().getType().equals(Material.LAVA) ||
+                            !oneHigher.getBlock().getType().equals(Material.AIR))
+                        continue;
+                    newHomeLoc = currentLoc;
+                }
+            }
+        }
+        if (newHomeLoc != null)
+            return newHomeLoc;
+        else
+            return centerLoc;
     }
 
 

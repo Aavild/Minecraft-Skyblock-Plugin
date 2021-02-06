@@ -5,22 +5,26 @@ api-version: 1.13
 description: A Skyblock plugin
 author: Aavild
 prefix: SkyL
-softdepends: [Vault, Quests-3.7.8]
-loadbefore:  [Vault]
+softdepends: [Vault, Quests-4.0.0-rc.3, PlaceholderAPI]
+loadbefore:  [Vault, Quests-4.0.0-rc.3, PlaceholderAPI]
 
 commands:
   is:
     usage: /<command>
     aliases: island
-    permission-message: You do not have access to that command
-    permission:
-      skylyfe.is
   isadmin:
     usage: /<command>
     aliases: islandadmin
+  gui:
+    usage: /<command>
     permission-message: You do not have access to that command
     permission:
-      skylyfe.admin
+      skylyfe.gui
+  toggleog:
+    usage: /<command>
+    permission-message: You do not have access to that command
+    permission:
+      skylyfe.toggleog
 permissions:
   buildanywhere:
     description: Makes the player able to build anywhere in the island world

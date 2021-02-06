@@ -5,11 +5,11 @@ import org.bukkit.World;
 
 public class IslandPositionManager {
     World skyworld;
-    int TotalIslandSize = 134;
+    int TotalIslandSize = 157;
     Location location (int index)
     {
         int i = index % 4; //returns either 0, 1, 2 or 3 which is used to deterrmine quadrant
-        int I = (int) Math.sqrt((double) index / 4); //0, 1, 2, 3 return 0 which is the first 4 center islands then 4 - 15 returns 1 which is 12 in total + 4 is the 16 center islands and so on
+        int I = (int) Math.sqrt((double) index / 4); //0 - 3 return 0 which is the first 4 center islands then 4 - 15 returns 1 which is 12 in total + 4 is the 16 center islands and so on
         int n = I * I + I - index / 4; //n is the special quadrant number, index 0, 1, 2, 3 will return 0 marking in the first quadrant. 5 - 7 will return 1, 8 - 11 will return 0,
         // 12 - 15 will return -1. This is used to calculate x and y coords. 0 is the base coord which will go like this: 0,0 -> 1,1 -> 2,2 while -1 will go according like this: (starting with 2,2) 2,1 -> 3,2 -> 4,3. -1 will work
         // likewise just with the x-axis instead

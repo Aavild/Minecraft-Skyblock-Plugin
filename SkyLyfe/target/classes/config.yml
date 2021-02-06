@@ -14,7 +14,7 @@ SkyworldName: Skyblocks
 #The size of the island where players can build
 IslandSize: 129
 #The Distance between each island in total meaning the space between where 2 islandowners can build
-IslandDistance: 5
+IslandDistance: 6
 #The schematic name for island creation located in plugins\SkyLyfe .schematic
 Schematic: default
 
