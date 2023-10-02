@@ -1,0 +1,48 @@
+
+
+
+
+###          Skyblock Config          ###
+
+
+#The name of the world which is shown in the server directory
+SkyworldName: Skyblocks
+
+
+
+
+#The size of the island where players can build
+IslandSize: 129
+#The Distance between each island in total meaning the space between where 2 islandowners can build
+IslandDistance: 6
+#The schematic name for island creation located in plugins\Skyblock .schematic
+Schematic: default
+
+
+#Allows players to upgrade their island to larger sizes. Requires Vault and an economy plugin
+DifferentSizes: false
+Sizes:
+#example setup, remove # for making this actual sizes or add your own. Must be from smallest to biggest island
+#This makes IslandSize redundant since IslandSize will then be loaded as the first in this list
+#  - 129
+#  - 141
+#  - 155
+#  - 171
+#  - 189
+#  - 209
+#  - 231
+#  - 255
+#note having this feature with for example biggest size be 255 means that with 5 islandDistance
+#there will be 260 blocks between each island from the start
+
+
+Prices:
+#Prices for each islandsize
+#  - 0
+#  - 500
+#  - 1000
+#  - 2000
+#  - 4000
+#  - 8000
+#  - 16000
+#  - 32000

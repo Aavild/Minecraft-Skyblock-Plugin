@@ -1,0 +1,31 @@
+name: Skyblock
+main: io.github.aavild.SkyblockMain
+version: 1.0.0
+api-version: 1.13
+description: A Skyblock plugin
+author: Aavild
+prefix: Sky
+softdepends: [Vault, Quests-4.0.0-rc.3, PlaceholderAPI]
+loadbefore:  [Vault, Quests-4.0.0-rc.3, PlaceholderAPI]
+
+commands:
+  is:
+    usage: /<command>
+    aliases: island
+  isadmin:
+    usage: /<command>
+    aliases: islandadmin
+  gui:
+    usage: /<command>
+    permission-message: You do not have access to that command
+    permission:
+      skyblock.gui
+  toggleog:
+    usage: /<command>
+    permission-message: You do not have access to that command
+    permission:
+      skyblock.toggleog
+permissions:
+  buildanywhere:
+    description: Makes the player able to build anywhere in the island world
+

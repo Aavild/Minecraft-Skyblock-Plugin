@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Skyblock:jar">
+    <output-path>$PROJECT_DIR$/../../1.16.4/plugins</output-path>
+    <root id="archive" name="Skyblock.jar">
+      <element id="module-output" name="Skyblock" />
+    </root>
+  </artifact>
+</component>
